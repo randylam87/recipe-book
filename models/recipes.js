@@ -1,5 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-  var Recipes = sequelize.define("Post", {
+  const Recipes = sequelize.define("Post", {
+    recipeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
     recipe: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,13 +20,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     classMethods: {
-      //need to research if i can do multiple associations.. need to associate recipes with ingredients
-      associate:  (models) => {
-        Post.belongsTo(models.User, {
-          foreignKey: {
-            allowNull: false
-          }
-        });
+      associate: (models) => {
+        Recipes.belongsTo(models.User, {
+            foreignKey: 'userId'
+          }),
+          Recipes.hasMany(models.Ingredients, {
+            through: 'Measurements',
+            foreignKey: 'ingredientsID'
+          });
       }
     }
   });

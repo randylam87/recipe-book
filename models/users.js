@@ -1,5 +1,10 @@
 module.exports = (connection, DataTypes) => {
   const User = connection.define("User", {
+    userId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
     username: {
       type: DataTypes.STRING,
       validate: {
