@@ -52,7 +52,7 @@ require("./routes/recipes-api-routes.js")(router);
 require("./routes/users-api-routes.js")(router);
 
 //load passport strategies
-require('./config/passport/passport.js')(passport, db.user);
+require('./config/passport/passport.js')(passport, db.User);
 
 //Sync Database
 db.sequelize.sync().then(function () {

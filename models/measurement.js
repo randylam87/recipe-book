@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-  const Measurements = sequelize.define('measurements', {
+  const Measurement = sequelize.define('Measurement', {
     measurements: DataTypes.STRING
   });
-  
-return Measurements;
+
+  return Measurement;
 };
