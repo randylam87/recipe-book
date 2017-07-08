@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 8080;
 const passport = require('passport');
 const env = require('dotenv').load();
 const db = require("./models");
-const router = express.Router();
 
 //BodyParser
 app.use(bodyParser.json());
@@ -48,8 +47,8 @@ app.get('/', function (req, res) {
 
 //Routes
 var authRoute = require('./routes/auth.js')(app, passport);
-require("./routes/recipes-api-routes.js")(router);
-require("./routes/users-api-routes.js")(router);
+require("./routes/recipes-api-routes.js")(app);
+require("./routes/users-api-routes.js")(app);
 
 //load passport strategies
 require('./config/passport/passport.js')(passport, db.User);
