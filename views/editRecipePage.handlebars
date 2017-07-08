@@ -25,6 +25,57 @@
                     <img id="img-upload" alt="test">
                 </div>
             </div>
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading text-center">Ingredients</div>
+
+                    <!-- Table -->
+                    <table class="table table-bordered">
+                        <th>Ingredients</th>
+                        <th>Serving size</th>
+                        <tr>
+                            <td>
+                                <div class="input-group input-group-lg">
+                                    <input type="text" class="form-control" placeholder="e.g. salt" aria-describedby="sizing-addon1">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Serving Size
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li class="dropdown-header"><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1">Author: </span>
+                    <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userName}} readonly>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1">Meal: </span>
+                    <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1">
+                </div>
+            </div>
         </div>
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

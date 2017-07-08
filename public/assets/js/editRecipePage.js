@@ -36,5 +36,10 @@ $(document).ready( function() {
     $("#imgInp").change(function(){
         readURL(this);
     }); 	
+
+    
+    $("#dropdownMenu1").on("click", function(){
+        dropdown("toggle");
+    })
 });
 
