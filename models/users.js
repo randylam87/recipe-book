@@ -1,5 +1,5 @@
-module.exports = (connection, DataTypes) => {
-  const User = connection.define("User", {
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define("User", {
     username: {
       type: DataTypes.STRING,
       validate: {
