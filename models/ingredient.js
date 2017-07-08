@@ -1,16 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
 const Ingredient = sequelize.define("Ingredient", {
-  ingredient: {
+  ingredient_name: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
       len: [1]
     }
-  },
-  instructions: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-    len: [1]
   }
 });
 
@@ -23,7 +18,12 @@ Ingredient.associate = (models) => {
     foreignKey: {
       allowNull: false
     }
-  });
+  }),
+  Ingredient.hasMany(models.Measurement, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
 }
 
 return Ingredient;
