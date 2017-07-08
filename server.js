@@ -5,7 +5,9 @@ const methodOverride = require('method-override');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080;
+
 let db = require("./models");
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
