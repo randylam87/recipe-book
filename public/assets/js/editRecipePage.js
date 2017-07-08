@@ -43,7 +43,7 @@ $(document).ready( function() {
     });
 
     $("#remove-ingredient").on("click", function(){
-        // removes most recent ingredient line
+        $(this).closest('tr').remove();
     })
 
     $("#save-ingredient").on("click", function(){
