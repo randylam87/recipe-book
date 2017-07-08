@@ -1,38 +1,45 @@
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define("User", {
+module.exports = function (sequelize, Sequelize) {
+
+  var User = sequelize.define('user', {
+    id: {
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
+    firstname: {
+      type: Sequelize.STRING,
+      notEmpty: true
+    },
+    lastname: {
+      type: Sequelize.STRING,
+      notEmpty: true
+    },
     username: {
-      type: DataTypes.STRING,
+      type: Sequelize.TEXT
+    },
+    about: {
+      type: Sequelize.TEXT
+    },
+    email: {
+      type: Sequelize.STRING,
       validate: {
-        len: [1, 15]
+        isEmail: true
       }
     },
     password: {
-      type: DataTypes.STRING,
-      validate: {
-        len: [1, 15]
-      }
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    last_login: {
+      type: Sequelize.DATE
+    },
+    status: {
+      type: Sequelize.ENUM('active', 'inactive'),
+      defaultValue: 'active'
     }
-  }, {
-    //  {
-    //   hooks: {
-    //     afterValidate: (user) => {
-    //       hashes password after a valid password is entered
-    //       user.password = bcrypt.hashSync(user.password, 8);
-    //     }
-    //   }
-    // }, 
 
-    classMethods: {
-      associate: (models) => {
-        User.hasMany(models.Recipes, {
-          onDelete: 'cascade',
-          foreignKey: {
-            allowNull: false
-          }
-        });
-      }
-    }
   });
 
   return User;
+
 };
