@@ -1,13 +1,13 @@
 module.exports = function (sequelize, DataTypes) {
   const Recipe = sequelize.define("Recipe", {
-    recipe: {
+    recipe_name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    instructions: {
+    recipe_instructions: {
       type: DataTypes.TEXT,
       allowNull: false,
       len: [1]
@@ -16,15 +16,19 @@ module.exports = function (sequelize, DataTypes) {
 
   Recipe.associate = function (models) {
     Recipe.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
-      }
-    }),
-    Recipe.hasMany(models.Ingredient, {
-      foreignKey: {
-        allowNull: false
-      }
-    })
+        through: {
+          model: 'Measurement',
+          unique: false
+        },
+        foreignKey: {
+          allowNull: false
+        }
+      }),
+      Recipe.hasMany(models.Ingredient, {
+        foreignKey: {
+          allowNull: false
+        }
+      })
   }
   return Recipe;
 };
