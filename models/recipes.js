@@ -1,11 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const Recipes = sequelize.define("Post", {
-    recipeId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
-    },
     recipe: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,18 +12,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       len: [1]
     }
-  }, {
-    classMethods: {
-      associate: (models) => {
-        Recipes.belongsTo(models.User, {
-            foreignKey: 'userId'
-          }),
-          Recipes.hasMany(models.Ingredients, {
-            through: 'Measurements',
-            foreignKey: 'ingredientsID'
-          });
-      }
-    }
   });
-  return Post;
+
+  Recipies.associate = (models) => {
+    Recipes.belongsTo(models.User, {
+        foreignKey: { allowNull: false }
+      }),
+      Recipes.hasMany(models.Ingredients, {
+        through: 'Measurements',
+        foreignKey: { allowNull: false }
+      });
+  };
+  
+  return Recipes;
 };
