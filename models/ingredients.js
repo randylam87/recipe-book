@@ -15,8 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Ingredients.belongsToMany(models.Recipes, {
-          through: 'Measurements',
+        Ingredients.belongsToMany(models.Recipe, {
+          through: {
+            model: Measurements,
+            unique:false
+          },
           foreignKey: {
             allowNull: false
           }

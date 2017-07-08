@@ -21,7 +21,10 @@ module.exports = (sequelize, DataTypes) => {
               }
             }),
             Recipes.hasMany(models.Ingredients, {
-              through: 'Measurements',
+              through: {
+            model: Measurements,
+            unique:false
+          },
               foreignKey: {
                 allowNull: false
               }
