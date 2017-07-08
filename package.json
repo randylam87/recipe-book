@@ -19,6 +19,7 @@
   "homepage": "https://github.com/randylam87/Project2#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "cls-bluebird": "^2.0.1",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
     "method-override": "^2.3.9",
