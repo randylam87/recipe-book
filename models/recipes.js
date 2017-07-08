@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Recipies.associate = (models) => {
+  Recipes.associate = (models) => {
     Recipes.belongsTo(models.User, {
         foreignKey: { allowNull: false }
       }),
