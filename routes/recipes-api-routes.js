@@ -1,6 +1,10 @@
 let db = require("../models");
 let request = require('request');
 
+let updateNutrition = (recipe) => {
+
+};
+
 module.exports = function(app) {
     //Find all of the recipes - include users
     app.get("/api/recipes", function(req, res) {
@@ -8,9 +12,9 @@ module.exports = function(app) {
             include: [db.Users]
         }).then(function(recipesDB) {
             request('https://api.edamam.com/api/nutrition-data?app_id=936c8444&app_key=6ebac7e6562262d5b1213134d8d7fe4a&ingr=1 slice of chocolate cake', function(error, response, body) {
-                console.log('body:', JSON.parse(body).calories);
+                console.log('calories:', JSON.parse(body).calories);
             });
-            res.json(recipesDB);
+            res.render("home",recipesDB);
         });
     });
 

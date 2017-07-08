@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 let db = require("./models");
-
+let router = express.Router();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,9 +26,8 @@ app.get('/', function (req, res) {
 });
  
 //Routes
-require("./routes/html-routes.js")(app);
-require("./routes/recipes-api-routes.js")(app);
-require("./routes/users-api-routes.js")(app);
+require("./routes/recipes-api-routes.js")(router);
+require("./routes/users-api-routes.js")(router);
 
 db.sequelize.sync({ force: true }).then(function() {
   app.listen(PORT, function() {
