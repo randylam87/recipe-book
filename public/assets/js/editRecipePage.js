@@ -35,6 +35,14 @@ $(document).ready( function() {
 
     $("#imgInp").change(function(){
         readURL(this);
-    }); 	
+    });
+
+
+    $("#add-ingredient").on("click", function(){
+        $("#tr1").after("<tr><td><div class='input-group input-group-lg'><input type='text' class='form-control' placeholder='e.g. salt' aria-describedby='sizing-addon1'></div></td><td><div class='dropdown'><button class='btn btn-primary dropdown-toggle' id='units' data-toggle='dropdown'>Units <span class='caret'></span></button><ul class='dropdown-menu'><li class='dropdown-header'>Teaspoon</li><li class='text-center'>1</li><li class='dropdown-header'>Tablespoon</li><li class='text-center'>1</li><li class='dropdown-header'>Cups</li><li class='text-center'>1</li><li class='text-center'>2</li><li class='text-center'>3</li><li class='text-center'>4</li><li class='dropdown-header'>Quarts</li><li class='text-center'>1</li><li class='text-center'>2</li><li class='text-center'>3</li><li class='text-center'>4</li></ul></div></td></tr>");
+    });
+
+    $("#remove-ingredient").on("click", function(){
+    })
 });
 

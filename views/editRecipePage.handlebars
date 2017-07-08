@@ -27,7 +27,22 @@
                     </div>
                     <img id="img-upload" alt="test">
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">Author: </span>
+                            <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userName}} readonly>
+                        </div>
+                        <br>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">Meal: </span>
+                            <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1">
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
             <div class="col-sm-8">
                 <div class="panel panel-default">
                     <!-- Default panel contents -->
@@ -37,7 +52,7 @@
                     <table class="table table-bordered">
                         <th>Ingredients</th>
                         <th>Serving size</th>
-                        <tr>
+                        <tr id="tr1">
                             <td>
                                 <div class="input-group input-group-lg">
                                     <input type="text" class="form-control" placeholder="e.g. salt" aria-describedby="sizing-addon1">
@@ -45,13 +60,40 @@
                             </td>
                             <td>
                                 <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        Dropdown <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-header">Header 1</li>
-                                        <li><a href="#">action 1</a></li>
-                                    </ul>
+                                    <select class="form-control" data-toggle="dropdown">
+                                        <option value="0" disabled>Teaspoons</option>
+                                        <option value="1">1</option>
+                                        <option value="0" disabled>Tablespoons</option>
+                                        <option value="1">1</option>
+                                        <option value="0" disabled>Cups</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="0" disabled>Quarts</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <button id="add-ingredient">Add ingredient</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button id="save-ingredient">save ingredients</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button id="edit-ingredient">edit ingredients</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button id="remove-ingredient">remove ingredients</button>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -59,22 +101,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon" id="sizing-addon1">Author: </span>
-                    <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userName}} readonly>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon" id="sizing-addon1">Meal: </span>
-                    <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1">
-                </div>
-            </div>
-        </div>
     </div>
+<script src="../public/assets/js/editRecipePage.js"></script>
 </body>
