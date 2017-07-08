@@ -20,7 +20,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false
       }
     }),
-    Recipe.hasMany(models.Ingredent, {
+    Recipe.hasMany(models.Ingredient, {
       foreignKey: {
         allowNull: false
       }
@@ -28,26 +28,3 @@ module.exports = function (sequelize, DataTypes) {
   }
   return Recipe;
 };
-
-
-
-// , {
-//   classMethods: {
-//     associate: (models) => {
-//       Recipes.belongsTo(models.User, {
-//           foreignKey: {
-//             allowNull: false
-//           }
-//         }),
-//         Recipes.hasMany(models.Ingredients, {
-//           through: {
-//         model: Measurements,
-//         unique:false
-//       },
-//           foreignKey: {
-//             allowNull: false
-//           }
-//         });
-//     }
-//   }
-// }

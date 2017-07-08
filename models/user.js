@@ -1,16 +1,26 @@
 module.exports = function (sequelize, DataTypes) {
   const User = sequelize.define("User", {
+    id: {
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     username: {
+      type: DataTypes.TEXT
+    },
+    email: {
       type: DataTypes.STRING,
       validate: {
-        len: [1, 15]
+        isEmail: true
       }
     },
     password: {
       type: DataTypes.STRING,
-      validate: {
-        len: [1, 15]
-      }
+      allowNull: false
+    },
+    status: {
+      type: DataTypes.ENUM('active', 'inactive'),
+      defaultValue: 'active'
     }
   });
 
@@ -24,27 +34,3 @@ module.exports = function (sequelize, DataTypes) {
   };
   return User;
 };
-
-
-
-// , {
-//  {
-//   hooks: {
-//     afterValidate: (user) => {
-//       hashes password after a valid password is entered
-//       user.password = bcrypt.hashSync(user.password, 8);
-//     }
-//   }
-// }, 
-
-//   classMethods: {
-//     associate: (models) => {
-//       User.hasMany(models.Recipes, {
-//         onDelete: 'cascade',
-//         foreignKey: {
-//           allowNull: false
-//         }
-//       });
-//     }
-//   }
-// }
