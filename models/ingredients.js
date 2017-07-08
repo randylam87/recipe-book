@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Ingredients = sequelize.define("Post", {
-  ingredient: {
+  const Ingredients = sequelize.define("ingredients", {
+    ingredient: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -12,14 +12,20 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       len: [1]
     }
+  }, {
+    classMethods: {
+      associate: (models) => {
+        Ingredients.belongsToMany(models.Recipe, {
+          through: {
+            model: Measurements,
+            unique:false
+          },
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      }
+    }
   });
-
-  Ingredients.associate = (models) => {
-    Ingredients.belongsToMany(models.Recipes, {
-      through: 'Measurements',
-      foreignKey: { allowNull: false }
-    });
-  };
-  
   return Ingredients;
 };
