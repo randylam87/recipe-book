@@ -1,44 +1,50 @@
 let db = require("../models");
 
-module.exports = function(app) {
-  
+module.exports = function (app) {
+
   //Find all of the users - include recipes
-  app.get("/api/users", function(req, res) {
-    db.User.findAll({
-      include: [db.Recipe]
-    }).then(function(usersDB) {
-      res.json(usersDB);
-    });
-  });
-  
-  //Find one single user - include recipes
-  app.get("/api/users/:id", function(req, res) {
-    db.User.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Recipe]
-    }).then(function(usersDB) {
-      res.json(usersDB);
-    });
-  });
-  
-  //Save a new user
-  app.post("/api/users", function(req, res) {
-    db.User.create(req.body).then(function(usersDB) {
-      res.json(usersDB);
-    });
-  });
-  
-  //Delete one single user
-  app.delete("/api/users/:id", function(req, res) {
-    db.User.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function(usersDB) {
+  app.get("/users", isLoggedIn, function (req, res) {
+    db.Users.findAll({
+      include: [db.Recipes]
+    }).then(function (usersDB) {
       res.json(usersDB);
     });
   });
 
+  //Find one single user - include recipes
+  app.get("/users/:id", isLoggedIn, function (req, res) {
+    db.Users.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Recipes]
+    }).then(function (usersDB) {
+      res.json(usersDB);
+    });
+  });
+
+  //Save a new user
+  app.post("/users", isLoggedIn, function (req, res) {
+    db.Users.create(req.body).then(function (usersDB) {
+      res.json(usersDB);
+    });
+  });
+
+  //Delete one single user
+  app.delete("/users/:id", isLoggedIn, function (req, res) {
+    db.Users.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (usersDB) {
+      res.json(usersDB);
+    });
+  });
 };
+
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+
+    res.redirect('/signin');
+  }
