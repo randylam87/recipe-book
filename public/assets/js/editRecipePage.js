@@ -43,6 +43,15 @@ $(document).ready( function() {
     });
 
     $("#remove-ingredient").on("click", function(){
+        // removes most recent ingredient line
+    })
+
+    $("#save-ingredient").on("click", function(){
+        // saves the entire recipe page and sends data to database.
+    })
+
+    $("#edit-ingredient").on("click", function(){
+        // user is able to edit/update the recipe page.
     })
 });
 
