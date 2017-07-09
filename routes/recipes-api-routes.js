@@ -35,8 +35,16 @@ module.exports = function (app) {
         });
     });
 
+    //Loads new recipe page
+    app.get('/new', isLoggedIn, (req,res)=>{
+        console.log(req.user);
+        let userInfo = req.user
+        res.render('newRecipe',userInfo);
+    });
+
     //Save a new recipe
     app.post("/recipes", isLoggedIn, function (req, res) {
+        console.log(req.body);
         db.Recipes.create(req.body).then(function (recipesDB) {
             res.json(recipesDB);
         });
