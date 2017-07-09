@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const Recipe = sequelize.define("Recipe", {
+  const Recipes = sequelize.define("Recipes", {
     recipeName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,9 +14,9 @@ module.exports = function (sequelize, DataTypes) {
     }
   });
 
-  Recipe.associate = function (models) {
+  Recipes.associate = function (models) {
 
-    Recipe.belongsTo(models.User, {
+    Recipes.belongsTo(models.Users, {
         through: {
           model: 'Measurement',
           unique: false
@@ -24,12 +24,12 @@ module.exports = function (sequelize, DataTypes) {
         foreignKey: {
           allowNull: false
         }
-      }),
-      Recipe.hasMany(models.Ingredient, {
+      });
+      Recipes.hasMany(models.Ingredients, {
         foreignKey: {
           allowNull: false
         }
       });
   };
-  return Recipe;
+  return Recipes;
 };

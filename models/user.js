@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const User = sequelize.define("User", {
+  const Users = sequelize.define("Users", {
     username: {
       type: DataTypes.TEXT
     },
@@ -19,13 +19,13 @@ module.exports = function (sequelize, DataTypes) {
     }
   });
 
-  User.associate = function (models) {
-    User.hasMany(models.Recipe, {
+  Users.associate = function (models) {
+    Users.hasMany(models.Recipes, {
       onDelete: 'cascade',
       foreignKey: {
         allowNull: false
       }
     });
   };
-  return User;
+  return Users;
 };
