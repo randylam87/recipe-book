@@ -16,16 +16,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label>Upload Image</label>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <span class="btn btn-default btn-file">
-                                Browse... <input type="file" id="imgInp">
-                            </span>
-                        </span>
-                        <input type="text" class="form-control" readonly>
-                    </div>
-                    <img id="img-upload" alt="test">
+                    <img id="img-upload" alt={{ingredients.image}} src={{ingredients.image}}>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -36,11 +27,11 @@
                         <br>
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">Meal: </span>
-                            <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1">
+                            <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1" value={{mealName}}>
                         </div>
                         <br>
                         <div class="col-sm-6">
-                            <button id="save-recipe">Save recipe</button>
+                            <button id="edit-recipe">Edit recipe</button>
                         </div>
                     </div>
                 </div>
@@ -68,38 +59,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id='addr0'>
-                                <td>
-                                1
-                                </td>
-                                <td>
-                                <input type="text" name='checkbox'  placeholder='salt' class="form-control"/>
-                                </td>
-                                <td>
-                                <select name="mail10" class="form-control">
-                                    <option value='0' disabled>Teaspoons</option>
-                                    <option value='1'>1 t</option>
-                                    <option value='0' disabled>Tablespoons</option>
-                                    <option value='1'>1 T</option>
-                                    <option value='0' disabled>Cups</option>
-                                    <option value='1'>1 C</option>
-                                    <option value='2'>2 C</option>
-                                    <option value='3'>3 C</option>
-                                    <option value='4'>4 C</option>
-                                    <option value='0' disabled>Quarts</option>
-                                    <option value='1'>1 Q</option>
-                                    <option value='2'>2 Q</option>
-                                    <option value='3'>3 Q</option>
-                                    <option value='4'>4 Q</option>
-                                </select>
-                                </td>
-                            </tr>
-                            <tr id='addr1'></tr>
+                            {{#each ingredient}}
+                                <tr>
+                                    <td>{{this.id}}</td>
+                                    <td>{{this.item}}</td>
+                                    <td>{{this.servingSize}}</td>
+                                </tr>
+                            {{/each}}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <a id="add_row" class="pull-left">Add Row</a><a id='delete_row' class="pull-right">Delete Row</a>
         </div>
     </div>
 <script src="../public/assets/js/editRecipePage.js"></script>
