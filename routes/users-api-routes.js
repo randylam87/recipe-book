@@ -25,6 +25,7 @@ module.exports = function (app) {
 
   //Save a new user
   app.post("/users", isLoggedIn, function (req, res) {
+    console.log(req.body);
     db.Users.create(req.body).then(function (usersDB) {
       res.json(usersDB);
     });
