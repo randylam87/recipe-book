@@ -13,13 +13,17 @@ let updateNutrition = (recipe) => {
 module.exports = function (app) {
     //Find all of the recipes - include users
     app.get("/recipes", isLoggedIn, function (req, res) {
-        // db.Recipes.findAll({
-        //     include: [db.Users]
-        // }).then(function (recipesDB) {
-        //     updateNutrition(recipesDB);
-        //     res.render("home", recipesDB);
-        // });
-        res.render("home");
+        db.Recipes.findAll({
+            include: [{
+                model: db.Ingredients,
+                include: [
+                    db.Measurements
+                ]
+            }]
+        }).then(function (recipesDB) {
+            console.log(recipesDB);
+            res.render("home");
+        });
 
     });
 
@@ -36,18 +40,32 @@ module.exports = function (app) {
     });
 
     //Loads new recipe page
-    app.get('/new', isLoggedIn, (req,res)=>{
+    app.get('/new', isLoggedIn, (req, res) => {
         console.log(req.user);
-        let userInfo = req.user
-        res.render('newRecipe',userInfo);
+        let userInfo = req.user;
+        res.render('newRecipe', userInfo);
     });
 
     //Save a new recipe
     app.post("/recipes", isLoggedIn, function (req, res) {
-        console.log(req.body);
-        db.Recipes.create(req.body).then(function (recipesDB) {
-            res.json(recipesDB);
+        db.Recipes.create({
+            UserId: req.body.userId,
+            recipeName: req.body.recipeName,
+            recipeInstructions: req.body.recipeInstructions
+        }).then((data) => {
+            db.Ingredients.create({
+                RecipeId: data.dataValues.id,
+                ingredientName: req.body.ingredientName
+            }).then((data) => {
+                console.log(data);
+                db.Measurements.create({
+                    IngredientId: data.dataValues.id,
+                    measurement: req.body.measurement
+                }).then(function (recipesDB) {
+                });
+            });
         });
+
     });
 
     //Delete one single recipe

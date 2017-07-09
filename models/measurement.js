@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Measurement = sequelize.define('Measurement', {
+  const Measurements = sequelize.define('Measurements', {
     Id: {
       autoIncrement: true,
       primaryKey: true,
@@ -13,6 +13,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   });
-
-  return Measurement;
+  return Measurements;
 };

@@ -1,33 +1,27 @@
 module.exports = (sequelize, DataTypes) => {
-const Ingredient = sequelize.define("Ingredient", {
-  ingredientName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      len: [1]
+  const Ingredients = sequelize.define("Ingredients", {
+    ingredientName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
     }
-  }
-});
+  });
+Ingredients.associate = (models) => {
 
-Ingredient.associate = (models) => {
-
-  Ingredient.belongsToMany(models.Recipe, {
+  Ingredients.belongsToMany(models.Recipes, {
     through: {
-      model: 'Measurement',
+      model: 'Measurements',
       unique: false
     },
-    foreignKey: {
-      allowNull: false
-    }
-  }),
+    foreignKey: "RecipeId"
+  });
 
-  Ingredient.hasMany(models.Measurement, {
-        foreignKey: {
-          allowNull: false
-        }
-      });
-}
-
-return Ingredient;
+  Ingredients.hasMany(models.Measurements, {
+    foreignKey: "IngredientId"
+  });
+};
+  return Ingredients;
 
 };
