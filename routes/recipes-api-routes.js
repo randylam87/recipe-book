@@ -12,7 +12,7 @@ let updateNutrition = (recipe) => {
 
 module.exports = function (app) {
     //Find all of the recipes - include users
-    app.get("/recipes", isLoggedIn, function (req, res) {
+    app.get("/recipes", function (req, res) {
         db.Recipes.findAll({
             include: [{
                 model: db.Ingredients,
@@ -22,13 +22,14 @@ module.exports = function (app) {
             }]
         }).then(function (recipesDB) {
             console.log(recipesDB);
-            res.render("home");
+            res.json(recipesDB);
+            // res.render("viewRecipePage");
         });
 
     });
 
     //Find one single recipe - include users
-    app.get("/recipes/:id", isLoggedIn, function (req, res) {
+    app.get("/recipes/:id", function (req, res) {
         db.Recipes.findOne({
             where: {
                 id: req.params.id
@@ -62,6 +63,7 @@ module.exports = function (app) {
                     IngredientId: data.dataValues.id,
                     measurement: req.body.measurement
                 }).then(function (recipesDB) {
+                    res.redirect('/recipes');
                 });
             });
         });
@@ -97,5 +99,5 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
 
-    res.redirect('/signin');
+    res.redirect('/home');
 }
