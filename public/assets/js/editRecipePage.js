@@ -38,13 +38,28 @@ $(document).ready( function() {
     });
 
 
-    $("#add-ingredient").on("click", function(){
-        $("#tr1").after("<tr><td><div class='input-group input-group-lg'><input type='text' class='form-control' placeholder='e.g. salt' aria-describedby='sizing-addon1'></div></td><td><div class='dropdown'><button class='btn btn-primary dropdown-toggle' id='units' data-toggle='dropdown'>Units <span class='caret'></span></button><ul class='dropdown-menu'><li class='dropdown-header'>Teaspoon</li><li class='text-center'>1</li><li class='dropdown-header'>Tablespoon</li><li class='text-center'>1</li><li class='dropdown-header'>Cups</li><li class='text-center'>1</li><li class='text-center'>2</li><li class='text-center'>3</li><li class='text-center'>4</li><li class='dropdown-header'>Quarts</li><li class='text-center'>1</li><li class='text-center'>2</li><li class='text-center'>3</li><li class='text-center'>4</li></ul></div></td></tr>");
+    // $("#add-ingredient").on("click", function(){
+    //     $("#tr1").after("<tr><td><div class='input-group input-group-lg'><input type='text' class='form-control' placeholder='e.g. salt' aria-describedby='sizing-addon1'></div></td><td><div class='dropdown'><select class='form-control' data-toggle='dropdown'><option value='0' disabled>Teaspoons</option><option value='1'>1 t</option><option value='0' disabled>Tablespoons</option><option value='1'>1 T</option><option value='0' disabled>Cups</option><option value='1'>1 C</option><option value='2'>2 C</option><option value='3'>3 C</option><option value='4'>4 C</option><option value='0' disabled>Quarts</option><option value='1'>1 Q</option><option value='2'>2 Q</option><option value='3'>3 Q</option><option value='4'>4 Q</option></select></div></td><td><input type='button' class='btnX' name='x' value='x' /></td></tr>");
+    // });
+
+    // $(".btnX").on("click", function(){
+    //     $(this).parents("tr").remove();
+    // });
+
+     var i=1;
+     $("#add_row").click(function(){
+      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='salt' class='form-control input-md'  /> </td><td><select name='name"+i+"' class=form-control><option value='0' disabled>Teaspoons</option><option value='1'>1 t</option><option value='0' disabled>Tablespoons</option><option value='1'>1 T</option><option value='0' disabled>Cups</option><option value='1'>1 C</option><option value='2'>2 C</option><option value='3'>3 C</option><option value='4'>4 C</option><option value='0' disabled>Quarts</option><option value='1'>1 Q</option><option value='2'>2 Q</option><option value='3'>3 Q</option><option value='4'>4 Q</option></select></td>");
+
+      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+      i++; 
     });
 
-    $("#remove-ingredient").on("click", function(){
-        $(this).closest('tr').remove();
-    })
+     $("#delete_row").click(function(){
+    	 if(i>1){
+		 $("#addr"+(i-1)).html('');
+		 i--;
+		 }
+	 });
 
     $("#save-ingredient").on("click", function(){
         // saves the entire recipe page and sends data to database.
