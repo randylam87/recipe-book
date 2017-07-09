@@ -1,0 +1,77 @@
+<script src="../public/assets/js/editRecipePage.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../public/assets/css/style.css">
+
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <img id="img-upload" alt={{ingredients.image}} src={{ingredients.image}}>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">Author: </span>
+                            <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userName}} readonly>
+                        </div>
+                        <br>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">Meal: </span>
+                            <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1" value={{mealName}}>
+                        </div>
+                        <br>
+                        <div class="col-sm-6">
+                            <button id="edit-recipe">Edit recipe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading text-center">Measurements</div>
+
+                    <!-- Table -->
+                    <table class="table table-bordered table-hover" id="tab_logic">
+                        <thead>
+                            <tr >
+                                <th class="text-center">
+                                    #
+                                </th>
+                                <th class="text-center">
+                                    Ingredient
+                                </th>
+                                <th class="text-center">
+                                    Serving Size
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each ingredient}}
+                                <tr>
+                                    <td>{{this.id}}</td>
+                                    <td>{{this.item}}</td>
+                                    <td>{{this.servingSize}}</td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../public/assets/js/editRecipePage.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>

@@ -61,8 +61,8 @@ $(document).ready( function() {
 		 }
 	 });
 
-    $("#save-recipe").on("click", function(){
-        // saves the entire recipe page and sends data to database.
+    $("#edit-recipe").on("click", function(){
+        // redirects user to the edit recipe page wher the user can update the recipe.
     })
 });
 

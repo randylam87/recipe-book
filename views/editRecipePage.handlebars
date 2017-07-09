@@ -11,55 +11,81 @@
                     </span>
                     <input type="text" class="form-control" readonly>
                 </div>
-                <img id="img-upload" alt="test">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">Author: </span>
+                            <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userName}} readonly>
+                        </div>
+                        <br>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">Meal: </span>
+                            <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1">
+                        </div>
+                        <br>
+                        <div class="col-sm-6">
+                            <button id="save-recipe">Save recipe</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading text-center">Ingredients</div>
 
-                <!-- Table -->
-                <table class="table table-bordered">
-                    <th>Ingredients</th>
-                    <th>Serving size</th>
-                    <tr>
-                        <td>
-                            <div class="input-group input-group-lg">
-                                <input type="text" class="form-control" placeholder="e.g. salt" aria-describedby="sizing-addon1">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    Dropdown <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-header">Header 1</li>
-                                    <li><a href="#">action 1</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading text-center">Measurements</div>
+
+                    <!-- Table -->
+                    <table class="table table-bordered table-hover" id="tab_logic">
+                        <thead>
+                            <tr >
+                                <th class="text-center">
+                                    #
+                                </th>
+                                <th class="text-center">
+                                    Ingredient
+                                </th>
+                                <th class="text-center">
+                                    Serving Size
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id='addr0'>
+                                <td>
+                                1
+                                </td>
+                                <td>
+                                <input type="text" name='checkbox'  placeholder='salt' class="form-control"/>
+                                </td>
+                                <td>
+                                <select name="mail10" class="form-control">
+                                    <option value='0' disabled>Teaspoons</option>
+                                    <option value='1'>1 t</option>
+                                    <option value='0' disabled>Tablespoons</option>
+                                    <option value='1'>1 T</option>
+                                    <option value='0' disabled>Cups</option>
+                                    <option value='1'>1 C</option>
+                                    <option value='2'>2 C</option>
+                                    <option value='3'>3 C</option>
+                                    <option value='4'>4 C</option>
+                                    <option value='0' disabled>Quarts</option>
+                                    <option value='1'>1 Q</option>
+                                    <option value='2'>2 Q</option>
+                                    <option value='3'>3 Q</option>
+                                    <option value='4'>4 Q</option>
+                                </select>
+                                </td>
+                            </tr>
+                            <tr id='addr1'></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <a id="add_row" class="pull-left">Add Row</a><a id='delete_row' class="pull-right">Delete Row</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1">Author: </span>
-                <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userName}} readonly>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1">Meal: </span>
-                <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1">
-            </div>
-        </div>
-    </div>
-</div>
+<script src="../public/assets/js/editRecipePage.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
