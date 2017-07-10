@@ -59,8 +59,8 @@ db.sequelize.sync().then(function () {
 });
 
 //Server Listener
-app.listen(8080, function (err) {
+app.listen(PORT, function (err) {
   if (!err)
-    console.log("Site is live");
+    console.log(`Site is live on port: ${PORT}`);
   else console.log(err);
 });
