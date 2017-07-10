@@ -1,3 +1,4 @@
+//Exports to ../server.js
 module.exports = (sequelize, DataTypes) => {
   const Ingredients = sequelize.define("Ingredients", {
     ingredientName: {
@@ -8,20 +9,19 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-Ingredients.associate = (models) => {
-
-  Ingredients.belongsToMany(models.Recipes, {
-    through: {
-      model: 'Measurements',
-      unique: false
-    },
-    foreignKey: "RecipeId"
-  });
-
-  Ingredients.hasMany(models.Measurements, {
-    foreignKey: "IngredientId"
-  });
-};
+  Ingredients.associate = (models) => {
+    //many:many with Recipes
+    Ingredients.belongsToMany(models.Recipes, {
+      through: {
+        model: 'Measurements',
+        unique: false
+      },
+      foreignKey: "RecipeId"
+    });
+    //many:many with Measurements
+    Ingredients.hasMany(models.Measurements, {
+      foreignKey: "IngredientId"
+    });
+  };
   return Ingredients;
-
 };

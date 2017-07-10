@@ -1,3 +1,4 @@
+//Exports to ../server.js
 module.exports = function (sequelize, DataTypes) {
   const Users = sequelize.define("Users", {
     username: {
@@ -18,7 +19,7 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: 'active'
     }
   });
-
+  //one:many with Recipies
   Users.associate = function (models) {
     Users.hasMany(models.Recipes, {
       onDelete: 'cascade',

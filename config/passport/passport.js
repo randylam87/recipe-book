@@ -1,4 +1,4 @@
-  //Encryption - bCrypt
+  //Encryption (password hashing)- bCrypt
   const bCrypt = require('bcrypt-nodejs');
 
   module.exports = function (passport, user) {
@@ -20,7 +20,7 @@
           });
 
       });
-
+      //Signup uses email as username and will have a hashed password
       passport.use('local-signup', new LocalStrategy({
               usernameField: 'email',
               passwordField: 'password',
@@ -31,25 +31,26 @@
               let generateHash = function (password) {
                   return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
               };
-
+              //Queries database to locate a single email
               User.findOne({
                   where: {
                       email: email
                   }
               }).then(function (user) {
-
+                //Checks database if the email already exists
                   if (user) {
                       return done(null, false, {
                           message: 'That email is already taken'
                       });
                   } else {
+                      //Hashes password
                       var userPassword = generateHash(password);
                       var data = {
                           email: email,
                           password: userPassword,
                           username: req.body.username,
                       };
-
+                      //Creates user with password
                       User.create(data).then(function (newUser, created) {
                           if (!newUser) {
                               return done(null, false);
@@ -80,19 +81,19 @@
               let isValidPassword = function (userpass, password) {
                   return bCrypt.compareSync(password, userpass);
               };
-
+              //Queries database to locate a single email
               User.findOne({
                   where: {
                       email: email
                   }
               }).then(function (user) {
-
+                //Checks database if the email already exists
                   if (!user) {
                       return done(null, false, {
                           message: 'Email does not exist'
                       });
                   }
-
+                  //Checks database if the hashed passwords match
                   if (!isValidPassword(user.password, password)) {
 
                       return done(null, false, {
@@ -102,7 +103,7 @@
 
                   let userinfo = user.get();
                   return done(null, userinfo);
-
+                  //Error handler
               }).catch(function (err) {
                   console.log("Error:", err);
                   return done(null, false, {

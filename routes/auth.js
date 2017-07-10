@@ -1,5 +1,5 @@
 let authController = require('../controllers/authcontroller.js');
-
+//Exports to ../server.js
 module.exports = function (app, passport) {
     app.get('/signup', authController.signup);
     app.get('/signin', authController.signin);

@@ -1,7 +1,15 @@
 
 <div class="container">
   <h1>Cookbook</h1>
+  {{!--{{#if username}}--}}
+  <h2>You are logged in as: {{username}} with a user Id of {{id}}</h2>
+  {{!--{{/if}}--}}
+
+  {{#unless username}}
+  <h2>You are not logged in.</h2>
+  {{/unless}}
   <div class='btn-grp'>
+    <a class='btn btn-warning' href="/logout">Logout</a>
     <a class='btn btn-warning' href="/signup">Sign Up</a>
     <a class='btn btn-success' href="/signin">Sign In</a><br><br>
     <a class='btn btn-info' href="/recipes">All Recipe</a>

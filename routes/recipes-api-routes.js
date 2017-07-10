@@ -6,12 +6,12 @@ let updateNutrition = (recipe) => {
     let appID = "936c8444";
     let ingredient = "1 slice of chocolate cake";
     request(`https://api.edamam.com/api/nutrition-data?app_id=${appID}&app_key=${apiKey}&ingr=${ingredient}`, function (error, response, body) {
-        console.log('calories:', JSON.parse(body).calories);
+        // console.log('calories:', JSON.parse(body).calories);
     });
 };
 
 module.exports = function (app) {
-////////////////////////THESE ARE FOR TESTING
+    ////////////////////////THESE ARE FOR TESTING
     //Find all of the recipes - include users
     app.get("/recipes", function (req, res) {
         db.Recipes.findAll({
@@ -20,16 +20,18 @@ module.exports = function (app) {
                 include: [
                     db.Measurements
                 ]
+            }, {
+                model: db.Users
             }]
         }).then(function (recipesDB) {
-            console.log(recipesDB);
+            // console.log(recipesDB);
             res.json(recipesDB);
             // res.render("viewRecipePage");
         });
     });
 
     //Edit Recipes
-    app.get('/edit', (req, res) => {
+    app.get('/edit', isLoggedIn, (req, res) => {
         db.Recipes.findAll({
             include: [{
                 model: db.Ingredients,
@@ -53,17 +55,24 @@ module.exports = function (app) {
             }]
         }).then((data) => {
             let recipesArr = [];
-            data.forEach((recipes) =>{
+            data.forEach((recipes) => {
                 recipesArr.push(recipes.dataValues);
             });
             let allRecipes = {
                 recipes: recipesArr
             };
-            console.log(allRecipes);
+            // console.log(allRecipes);
             res.render("viewRecipePage", allRecipes);
         });
     });
-///////////////////////END TESTING
+    ///////////////////////END TESTING
+
+    //Root
+    app.get('/', function (req, res) {
+        // console.log(req);
+        let userInfo = req.user;
+        res.render('home', userInfo);
+    });
 
     //Find one single recipe - include users
     app.get("/recipes/:id", function (req, res) {
@@ -79,7 +88,7 @@ module.exports = function (app) {
 
     //Loads new recipe page
     app.get('/new', isLoggedIn, (req, res) => {
-        console.log(req.user);
+        // console.log(req.user);
         let userInfo = req.user;
         res.render('newRecipe', userInfo);
     });
@@ -95,7 +104,7 @@ module.exports = function (app) {
                 RecipeId: data.dataValues.id,
                 ingredientName: req.body.ingredientName
             }).then((data) => {
-                console.log(data);
+                // console.log(data);
                 db.Measurements.create({
                     IngredientId: data.dataValues.id,
                     measurement: req.body.measurement

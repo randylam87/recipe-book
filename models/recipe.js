@@ -1,3 +1,4 @@
+//Exports to ../server.js
 module.exports = function (sequelize, DataTypes) {
   const Recipes = sequelize.define("Recipes", {
     recipeName: {
@@ -15,21 +16,22 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Recipes.associate = function (models) {
-
+    //many:one with Users
     Recipes.belongsTo(models.Users, {
-        through: {
-          model: 'Measurement',
-          unique: false
-        },
-        foreignKey: {
-          allowNull: false
-        }
-      });
-      Recipes.hasMany(models.Ingredients, {
-        foreignKey: {
-          allowNull: false
-        }
-      });
+      through: {
+        model: 'Measurement',
+        unique: false
+      },
+      foreignKey: {
+        allowNull: false
+      }
+    });
+    //many:many with Ingredients
+    Recipes.hasMany(models.Ingredients, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
   };
   return Recipes;
 };
