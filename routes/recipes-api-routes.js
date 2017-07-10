@@ -69,7 +69,13 @@ module.exports = function (app) {
 
     //Root
     app.get('/', function (req, res) {
-        // console.log(req);
+        console.log(req);
+        let userInfo = req.user;
+        res.render('home', userInfo);
+    });
+
+    app.get('/home', function (req, res) {
+        console.log(req);
         let userInfo = req.user;
         res.render('home', userInfo);
     });
