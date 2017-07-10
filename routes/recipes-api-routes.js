@@ -1,15 +1,6 @@
 let db = require("../models");
 let request = require('request');
 
-let updateNutrition = (recipe) => {
-    let apiKey = "6ebac7e6562262d5b1213134d8d7fe4a";
-    let appID = "936c8444";
-    let ingredient = "1 slice of chocolate cake";
-    request(`https://api.edamam.com/api/nutrition-data?app_id=${appID}&app_key=${apiKey}&ingr=${ingredient}`, function (error, response, body) {
-        // console.log('calories:', JSON.parse(body).calories);
-    });
-};
-
 module.exports = function (app) {
     ////////////////////////THESE ARE FOR TESTING
     //Find all of the recipes - include users
@@ -44,7 +35,7 @@ module.exports = function (app) {
         });
     });
 
-    //View All Recipes Recipes
+    //View All Recipes
     app.get('/all', (req, res) => {
         db.Recipes.findAll({
             include: [{
@@ -81,9 +72,18 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             },
-            include: [db.Users]
+            include: [{
+                model: db.Ingredients,
+                include: [
+                    db.Measurements
+                ]
+            }, {
+                model: db.Users
+            }]
         }).then(function (recipesDB) {
-            res.json(recipesDB);
+
+            findAllIngredients(recipesDB, res);
+            // res.json(recipesDB);
         });
     });
 
@@ -96,25 +96,17 @@ module.exports = function (app) {
 
     //Save a new recipe
     app.post("/recipes", isLoggedIn, function (req, res) {
+        console.log(req.body);
         db.Recipes.create({
             UserId: req.body.userId,
             recipeName: req.body.recipeName,
             recipeInstructions: req.body.recipeInstructions
         }).then((data) => {
-            db.Ingredients.create({
-                RecipeId: data.dataValues.id,
-                ingredientName: req.body.ingredientName
-            }).then((data) => {
-                // console.log(data);
-                db.Measurements.create({
-                    IngredientId: data.dataValues.id,
-                    measurement: req.body.measurement
-                }).then(function (recipesDB) {
-                    res.redirect('/recipes');
-                });
-            });
+            //looping through and creating table row for each ingredient and measurement
+            for (i = 0; i < req.body.ingredientName.length; i++) {
+                updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
+            }
         });
-
     });
 
     //Delete one single recipe
@@ -140,6 +132,51 @@ module.exports = function (app) {
         });
     });
 
+};
+
+//helper functions
+
+// Finds nutrition value then sends the object
+let updateNutrition = (ingredients, res, recipesDB) => {
+    let apiKey = "6ebac7e6562262d5b1213134d8d7fe4a";
+    let appID = "936c8444";
+    let nutritionArray = [];
+    request(`https://api.edamam.com/api/nutrition-data?app_id=${appID}&app_key=${apiKey}&ingr=${ingredients}`, function (error, response, body) {
+
+        //Nutrition Array Order = Calories, Fat, Protein, Carbs
+        nutritionArray.push(JSON.parse(body).calories);
+        nutritionArray.push(JSON.parse(body).totalNutrients.FAT.quantity);
+        nutritionArray.push(JSON.parse(body).totalNutrients.PROCNT.quantity);
+        nutritionArray.push(JSON.parse(body).totalNutrients.CHOCDF.quantity);
+        
+        recipesDB = recipesDB.toJSON();
+        recipesDB.nutrition = nutritionArray;
+        res.json(recipesDB);
+    });
+};
+// Finds all the ingredients before finding nutritional value
+let findAllIngredients = (recipesDB, res) => {
+    let ingredientsArray = [];
+    for (i = 0; i < recipesDB.Ingredients.length; i++) {
+        ingredientsArray.push(recipesDB.Ingredients[i].Measurements[0].dataValues.measurement + " " + recipesDB.Ingredients[i].ingredientName);
+    }
+    updateNutrition(ingredientsArray.join(" and "), res, recipesDB);
+};
+
+// Adds Ingredients to Database
+let updateIngredients = (data, ingredient, measurement, req, res) => {
+    db.Ingredients.create({
+        RecipeId: data.dataValues.id,
+        ingredientName: ingredient
+    }).then((data) => {
+        console.log(data);
+        db.Measurements.create({
+            IngredientId: data.dataValues.id,
+            measurement: measurement
+        }).then(function (recipesDB) {
+            // res.redirect('/recipes');
+        });
+    });
 };
 
 function isLoggedIn(req, res, next) {
