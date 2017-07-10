@@ -69,19 +69,14 @@ module.exports = function (app) {
 
     //Root
     app.get('/', function (req, res) {
-        console.log(req);
-        let userInfo = req.user;
-        res.render('home', userInfo);
-    });
-
-    app.get('/home', function (req, res) {
-        console.log(req);
+        // console.log(req);
         let userInfo = req.user;
         res.render('home', userInfo);
     });
 
     //Find one single recipe - include users
     app.get("/recipes/:id", function (req, res) {
+        console.log(req.params);
         db.Recipes.findOne({
             where: {
                 id: req.params.id
@@ -150,6 +145,5 @@ module.exports = function (app) {
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-
     res.redirect('/home');
 }
