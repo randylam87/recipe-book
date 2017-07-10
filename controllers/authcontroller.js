@@ -10,7 +10,8 @@ exports.signin = function(req,res){
 };
 
 exports.home = function(req,res){
-	res.render('home'); 
+	let userInfo = req.user;
+  res.render('home', userInfo);
 };
 
 exports.logout = function(req,res){
