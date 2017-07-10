@@ -22,3 +22,21 @@
     width: 100%;
     height: 30%;
 }
+
+#create-book{
+    font-size: 100px;
+}
+
+#my-book{
+    font-size: 100px;
+    color: green;
+}
+
+#friend-book{
+    font-size: 100px;
+    color: burlywood;
+}
+
+#cookbook-title-field{
+    width: 100%;
+}
