@@ -1,20 +1,26 @@
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <form action="/recipes/" method="GET" class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search recipes by name..." name='' value=''>
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <div class="navbar-form navbar-right">
+      {{#if username}}<span id='nav-user'><strong>You are logged in as: {{username}} (User Id of {{id}})</strong></span><a class='btn btn-warning' href="/logout">Logout</a> {{/if}} {{#unless username}}<a class='btn btn-warning'
+        href="/signup">Sign Up</a>
+      <a class='btn btn-success' href="/signin">Sign In</a>{{/unless}}
+    </div>
+  </div>
+</nav>
 
 <div class="container">
   <h1>Cookbook</h1>
-  {{!--{{#if username}}--}}
-  <h2>You are logged in as: {{username}} with a user Id of {{id}}</h2>
-  {{!--{{/if}}--}}
-
-  {{#unless username}}
-  <h2>You are not logged in.</h2>
-  {{/unless}}
+  <hr>
   <div class='btn-grp'>
-    <a class='btn btn-warning' href="/logout">Logout</a>
-    <a class='btn btn-warning' href="/signup">Sign Up</a>
-    <a class='btn btn-success' href="/signin">Sign In</a><br><br>
-    <a class='btn btn-info' href="/recipes">All Recipe</a>
-    <a class='btn btn-primary' href="/new">New Recipe</a><br><br>
-    <a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a>
+    <a class='btn btn-info' href="/recipes">View All Recipes</a> {{#if username}}<a class='btn btn-primary' href="/new">New Recipe</a>{{/if}}<hr>
+    {{#if username}}<a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a>{{/if}}
     <a class='btn btn-info' href="/all">View All Recipe (Carlos) </a>
+    <hr>
   </div>
 </div>

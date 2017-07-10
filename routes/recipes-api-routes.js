@@ -76,6 +76,7 @@ module.exports = function (app) {
 
     //Find one single recipe - include users
     app.get("/recipes/:id", function (req, res) {
+        console.log(req.params);
         db.Recipes.findOne({
             where: {
                 id: req.params.id
@@ -144,6 +145,5 @@ module.exports = function (app) {
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-
     res.redirect('/home');
 }
