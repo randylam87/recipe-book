@@ -11,6 +11,7 @@ let updateNutrition = (recipe) => {
 };
 
 module.exports = function (app) {
+////////////////////////THESE ARE FOR TESTING
     //Find all of the recipes - include users
     app.get("/recipes", function (req, res) {
         db.Recipes.findAll({
@@ -25,8 +26,44 @@ module.exports = function (app) {
             res.json(recipesDB);
             // res.render("viewRecipePage");
         });
-
     });
+
+    //Edit Recipes
+    app.get('/edit', (req, res) => {
+        db.Recipes.findAll({
+            include: [{
+                model: db.Ingredients,
+                include: [
+                    db.Measurements
+                ]
+            }]
+        }).then((recipesDB) => {
+            res.render("editRecipePage");
+        });
+    });
+
+    //View All Recipes Recipes
+    app.get('/all', (req, res) => {
+        db.Recipes.findAll({
+            include: [{
+                model: db.Ingredients,
+                include: [
+                    db.Measurements
+                ]
+            }]
+        }).then((data) => {
+            let recipesArr = [];
+            data.forEach((recipes) =>{
+                recipesArr.push(recipes.dataValues);
+            });
+            let allRecipes = {
+                recipes: recipesArr
+            };
+            console.log(allRecipes);
+            res.render("viewRecipePage", allRecipes);
+        });
+    });
+///////////////////////END TESTING
 
     //Find one single recipe - include users
     app.get("/recipes/:id", function (req, res) {
