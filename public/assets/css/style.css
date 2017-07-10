@@ -31,3 +31,21 @@ body {
     color: white;
     padding-right: 3px;
 }
+
+#create-book{
+    font-size: 100px;
+}
+
+#my-book{
+    font-size: 100px;
+    color: green;
+}
+
+#friend-book{
+    font-size: 100px;
+    color: burlywood;
+}
+
+#cookbook-title-field{
+    width: 100%;
+}
