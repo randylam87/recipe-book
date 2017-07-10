@@ -1,5 +1,20 @@
-<h1>Cookbook</h1>
 
-<button><a class="btn btn-default" href="/signup">Sign Up</a></button>
-<button><a class="btn btn-default" href="/signin">Sign In</a></button>
-<button><a class="btn btn-default" href="/new">New Recipe</a></button>
+<div class="container">
+  <h1>Cookbook</h1>
+  {{!--{{#if username}}--}}
+  <h2>You are logged in as: {{username}} with a user Id of {{id}}</h2>
+  {{!--{{/if}}--}}
+
+  {{#unless username}}
+  <h2>You are not logged in.</h2>
+  {{/unless}}
+  <div class='btn-grp'>
+    <a class='btn btn-warning' href="/logout">Logout</a>
+    <a class='btn btn-warning' href="/signup">Sign Up</a>
+    <a class='btn btn-success' href="/signin">Sign In</a><br><br>
+    <a class='btn btn-info' href="/recipes">All Recipe</a>
+    <a class='btn btn-primary' href="/new">New Recipe</a><br><br>
+    <a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a>
+    <a class='btn btn-info' href="/all">View All Recipe (Carlos) </a>
+  </div>
+</div>

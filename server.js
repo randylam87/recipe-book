@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 const passport = require('passport');
 const env = require('dotenv').load();
 const db = require("./models");
-
+////Middleware
 //BodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -19,6 +19,12 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({
   type: "application/vnd.api+json"
 }));
+
+//Method Override
+app.use(methodOverride("_method"));
+
+//Public
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Passport
 app.use(session({
@@ -30,10 +36,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-//Public
-app.use(express.static(path.join(__dirname, '/public')));
-
-app.use(methodOverride("_method"));
+//Load passport strategies
+require('./config/passport/passport.js')(passport, db.Users);
 
 //For Handlebars
 app.engine('handlebars', exphbs({
@@ -41,19 +45,12 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-app.get('/', function (req, res) {
-  res.render('home');
-});
-
 //Routes
 var authRoute = require('./routes/auth.js')(app, passport);
 require("./routes/recipes-api-routes.js")(app);
 require("./routes/users-api-routes.js")(app);
 
-//load passport strategies
-require('./config/passport/passport.js')(passport, db.Users);
-
-//Sync Database
+//Sequelize Sync Database
 db.sequelize.sync().then(function () {
   console.log('Nice! Database looks fine');
 
@@ -61,10 +58,9 @@ db.sequelize.sync().then(function () {
   console.log(err, "Something went wrong with the Database Update!");
 });
 
-
+//Server Listener
 app.listen(8080, function (err) {
   if (!err)
     console.log("Site is live");
   else console.log(err);
-
 });

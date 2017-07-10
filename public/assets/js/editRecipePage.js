@@ -63,6 +63,6 @@ $(document).ready( function() {
 
     $("#save-recipe").on("click", function(){
         // saves the entire recipe page and sends data to database.
-    })
+    });
 });
 

@@ -4,7 +4,9 @@
     "password": "root",
     "database": "cookbook_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    //disabled logging to avoid being spammed
+    "logging": false
   },
   "test": {
     "username": "root",
@@ -15,6 +17,8 @@
   },
   "production": {
     "use_env_variable": "JAWSDB_URL",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    //disabled logging to avoid being spammed
+    "logging": false
   }
 }

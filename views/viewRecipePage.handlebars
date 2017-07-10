@@ -1,4 +1,4 @@
-<script src="../public/assets/js/editRecipePage.js"></script>
+{{!--<script src="../public/assets/js/editRecipePage.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -11,27 +11,27 @@
 <link rel="stylesheet" href="../public/assets/css/style.css">
 
 
-<body>
+<body>--}}
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <img id="img-upload" alt={{ingredients.image}} src={{ingredients.image}}>
+                    {{!--<img id="img-upload" alt="{{ingredients.image}}" src="{{ingredients.image}}">--}}
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">Author: </span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userName}} readonly>
+                            <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userId}} readonly>
                         </div>
                         <br>
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">Meal: </span>
-                            <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1" value={{mealName}}>
+                            <input type="text" class="form-control" placeholder="{{recipeName}}" aria-describedby="sizing-addon1">
                         </div>
                         <br>
                         <div class="col-sm-6">
-                            <button id="edit-recipe">Edit recipe</button>
+                            <button id="edit-recipe" class='btn btn-primary'>Edit recipe</button>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
 
 
             <div class="col-sm-8">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <!-- Default panel contents -->
                     <div class="panel-heading text-center">Measurements</div>
 
@@ -48,22 +48,23 @@
                         <thead>
                             <tr >
                                 <th class="text-center">
-                                    #
+                                    {{!--#--}}Recipe Id
                                 </th>
                                 <th class="text-center">
-                                    Ingredient
+                                    {{!--Ingredient--}}Recipe Name
                                 </th>
                                 <th class="text-center">
-                                    Serving Size
+                                    {{!--Serving Size--}}Recipe Instructions
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each ingredient}}
+                            {{!--just testing if stuff works will put in correct stuff soon please delete this when done--}}
+                            {{!--{{#each ingredient}}--}}{{#each recipes}}
                                 <tr>
-                                    <td>{{this.id}}</td>
-                                    <td>{{this.item}}</td>
-                                    <td>{{this.servingSize}}</td>
+                                    <td>{{id}}</td>
+                                    <td>{{recipeName}}</td>
+                                    <td>{{recipeInstructions}}</td>
                                 </tr>
                             {{/each}}
                         </tbody>
@@ -72,6 +73,6 @@
             </div>
         </div>
     </div>
-<script src="../public/assets/js/editRecipePage.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</body>
+<script src="assets/js/editRecipePage.js"></script>
+{{!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>--}}
