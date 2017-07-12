@@ -20,6 +20,21 @@ module.exports = function (app) {
             // res.render("viewRecipePage");
         });
     });
+    //Find recipe by ingredient
+    app.get("/api/recipes/", function (req, res) {
+        // Add sequelize code to find all posts where the category is equal to req.params.category,
+        db.Ingredients.findAll({
+                where: {
+                    ingredientName: req.query.ingredient
+                },
+                include: [{
+                    model: db.Recipes
+                }],
+            })
+            .then(function (result) {
+                res.json(result);
+            });
+    });
 
     //Edit Recipes
     app.get('/edit', isLoggedIn, (req, res) => {
@@ -148,7 +163,7 @@ let updateNutrition = (ingredients, res, recipesDB) => {
         nutritionArray.push(JSON.parse(body).totalNutrients.FAT.quantity);
         nutritionArray.push(JSON.parse(body).totalNutrients.PROCNT.quantity);
         nutritionArray.push(JSON.parse(body).totalNutrients.CHOCDF.quantity);
-        
+
         recipesDB = recipesDB.toJSON();
         recipesDB.nutrition = nutritionArray;
         res.json(recipesDB);

@@ -1,10 +1,10 @@
 <nav class="navbar navbar-inverse">
   <div class="container">
-    <form action="/recipes/" method="GET" class="navbar-form navbar-left" role="search">
+    <form action="/api/recipes/" method="GET" class="navbar-form navbar-left">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search recipes by name..." name='' value=''>
+        <input type="text" class="searchInput form-control" placeholder="Search by ingredient..." name='ingredient'>
       </div>
-      <button type="submit" class="btn btn-primary">Search</button>
+      <button type="submit" class="searchBtn btn btn-primary">Search</button>
     </form>
     <div class="navbar-form navbar-right">
       {{#if username}}<span id='nav-user'><strong>You are logged in as: {{username}} (User Id of {{id}})</strong></span><a class='btn btn-warning' href="/logout">Logout</a> {{/if}} {{#unless username}}<a class='btn btn-warning'
