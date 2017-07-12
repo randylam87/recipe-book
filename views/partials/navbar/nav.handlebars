@@ -7,9 +7,9 @@
             <button type="submit" class="searchBtn btn btn-primary">Search</button>
         </form>
         <div class="navbar-form navbar-right">
-            {{#if username}}
-            <span id='nav-user'><strong>You are logged in as: {{username}} (User Id of {{id}})</strong></span>
-            <a class='btn btn-warning' href="/logout">Logout</a> {{/if}} {{#unless username}}
+            {{#if currentUser}}
+            <span id='nav-user'><strong>You are logged in as: {{currentUser.currentUsername}} (User Id of {{currentUser.currentUserId}})</strong></span>
+            <a class='btn btn-warning' href="/logout">Logout</a> {{/if}} {{#unless currentUser}}
             <button type="button" class="btn btn-info btn-warning" id='register' data-toggle="modal" data-target="#registerModal">Register</button>
             <button type="button" class="btn btn-info btn-success" id='signin' data-toggle="modal" data-target="#signinModal">Sign In</button>            {{/unless}}
         </div>
