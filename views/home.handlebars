@@ -1,17 +1,158 @@
 {{>navbar/nav}}
 <div class="container">
   <h1>Cookbook</h1>
-  <hr>
+  <hr> {{!-- test buttons --}}
   <div class='btn-grp'>
-    <a class='btn btn-info' href="/recipes/all">View All Recipes</a>
-    {{#if username}}
-    <a class='btn btn-primary' href="/new">New Recipe</a>
-    {{/if}}
-    <hr> 
-    {{#if username}}
-    <a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a>
-    {{/if}}
+    <a class='btn btn-info' href="/recipes/all">View All Recipes</a> {{#if username}}
+    <a class='btn btn-primary' href="/new">New Recipe</a> {{/if}}
+    <hr> {{#if username}}
+    <a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a> {{/if}}
     <a class='btn btn-info' href="/all">View All Recipe (Carlos) </a>
     <hr>
   </div>
+  {{!-- end test buttons --}}
+  <div id='viewMoreRecipes'>
+{{!-- JS generated buttons are appended here --}}
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading text-center">Total Recipes: <span id='numOfRecipes'></span></div>
+    <table class="table table-condensed text-center">
+      <thead>
+        <th class="text-center">
+          Author
+        </th>
+        <th class="text-center">
+          Recipe Name
+        </th>
+        <th class="text-center">
+          Ingredients
+        </th>
+        </tr>
+      </thead>
+      <tbody class='text-center'>
+        {{#each recipes}}
+        <tr class='hidden recipes'>
+          <td>{{username}}</td>
+          <td>{{recipeName}}</td>
+          <td>{{ingredientName}}</td>
+        </tr>
+        {{/each}}
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        <tr class='recipes text-center hidden'>
+          <td>testing user 1</td>
+          <td>testing recipe 1</td>
+          <td>testing Ingredients 1</td>
+        </tr>
+        
+        
+      </tbody>
+  </div>
 </div>
+</table>
+<script src='assets/js/home.js' </div>
