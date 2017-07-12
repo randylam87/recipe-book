@@ -4,7 +4,7 @@ let request = require('request');
 module.exports = function (app) {
     ////////////////////////THESE ARE FOR TESTING
     //Find all of the recipes - include users
-    app.get("/recipes", function (req, res) {
+    app.get("/recipes/all", function (req, res) {
         db.Recipes.findAll({
             include: [{
                 model: db.Ingredients,
@@ -21,17 +21,18 @@ module.exports = function (app) {
         });
     });
     //Find recipe by ingredient
-    app.get("/api/recipes/", function (req, res) {
-        // Add sequelize code to find all posts where the category is equal to req.params.category,
-        db.Ingredients.findAll({
-                where: {
-                    ingredientName: req.query.ingredient
-                },
+    app.get("/recipes/", function (req, res) {
+        db.Recipes.findAll({
                 include: [{
-                    model: db.Recipes
-                }],
+                    model: db.Ingredients
+                }]
             })
             .then(function (result) {
+                result.forEach((data, index) => {
+                    if (data.recipeName.toLowerCase().indexOf(req.query.search.toLowerCase()) == -1) {
+                        result.splice(index, 1);
+                    }
+                });
                 res.json(result);
             });
     });

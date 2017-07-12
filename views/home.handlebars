@@ -3,8 +3,14 @@
   <h1>Cookbook</h1>
   <hr>
   <div class='btn-grp'>
-    <a class='btn btn-info' href="/recipes">View All Recipes</a> {{#if username}}<a class='btn btn-primary' href="/new">New Recipe</a>{{/if}}
-    <hr> {{#if username}}<a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a>{{/if}}
+    <a class='btn btn-info' href="/recipes/all">View All Recipes</a>
+    {{#if username}}
+    <a class='btn btn-primary' href="/new">New Recipe</a>
+    {{/if}}
+    <hr> 
+    {{#if username}}
+    <a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a>
+    {{/if}}
     <a class='btn btn-info' href="/all">View All Recipe (Carlos) </a>
     <hr>
   </div>
