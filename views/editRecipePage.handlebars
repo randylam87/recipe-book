@@ -1,3 +1,4 @@
+{{>navbar/nav}}
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
@@ -39,7 +40,7 @@
                     <!-- Table -->
                     <table class="table table-bordered table-hover" id="tab_logic">
                         <thead>
-                            <tr >
+                            <tr>
                                 <th class="text-center">
                                     #
                                 </th>
@@ -54,13 +55,13 @@
                         <tbody>
                             <tr id='addr0'>
                                 <td>
-                                1
+                                    1
                                 </td>
                                 <td>
-                                <input type="text" name='checkbox'  placeholder='salt' class="form-control"/>
+                                    <input type="text" name='checkbox' placeholder='salt' class="form-control" />
                                 </td>
                                 <td>
-                                <select name="mail10" class="form-control">
+                                    <select name="mail10" class="form-control">
                                     <option value='0' disabled>Teaspoons</option>
                                     <option value='1'>1 t</option>
                                     <option value='0' disabled>Tablespoons</option>
@@ -86,5 +87,6 @@
             <a id="add_row" class="pull-left">Add Row</a><a id='delete_row' class="pull-right">Delete Row</a>
         </div>
     </div>
-<script src="assets/js/editRecipePage.js"></script>
-{{!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
+    <script src="assets/js/editRecipePage.js"></script>
+    {{!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
