@@ -2,9 +2,10 @@ let db = require("../models");
 let request = require('request');
 
 module.exports = function (app) {
-    ////////////////////////THESE ARE FOR TESTING
-    //Find all of the recipes - include users
-    app.get("/recipes/all", function (req, res) {
+
+    //Main Page - Takes all recipes
+    app.get("/", function (req, res) {
+        let userInfo = req.user;
         db.Recipes.findAll({
             include: [{
                 model: db.Ingredients,
@@ -12,19 +13,25 @@ module.exports = function (app) {
                     db.Measurements
                 ]
             }, {
-                model: db.Users
+                model: db.Users,
+                attributes: ["id", "username"]
             }]
         }).then(function (recipesDB) {
-            // console.log(recipesDB);
-            res.json(recipesDB);
-            // res.render("viewRecipePage");
+            recipesDB.push(req.user);
+            res.render('home', recipesDB);
         });
     });
-    //Find recipe by ingredient
+    //Find recipe by recipe name - search
     app.get("/recipes/", function (req, res) {
         db.Recipes.findAll({
                 include: [{
-                    model: db.Ingredients
+                    model: db.Ingredients,
+                    include: [
+                        db.Measurements
+                    ]
+                }, {
+                    model: db.Users,
+                    attributes: ["id", "username"]
                 }]
             })
             .then(function (result) {
@@ -33,6 +40,7 @@ module.exports = function (app) {
                         result.splice(index, 1);
                     }
                 });
+                result.push(req.user);
                 res.json(result);
             });
     });
@@ -52,34 +60,34 @@ module.exports = function (app) {
     });
 
     //View All Recipes
-    app.get('/all', (req, res) => {
-        db.Recipes.findAll({
-            include: [{
-                model: db.Ingredients,
-                include: [
-                    db.Measurements
-                ]
-            }]
-        }).then((data) => {
-            let recipesArr = [];
-            data.forEach((recipes) => {
-                recipesArr.push(recipes.dataValues);
-            });
-            let allRecipes = {
-                recipes: recipesArr
-            };
-            // console.log(allRecipes);
-            res.render("viewRecipePage", allRecipes);
-        });
-    });
+    // app.get('/all', (req, res) => {
+    //     db.Recipes.findAll({
+    //         include: [{
+    //             model: db.Ingredients,
+    //             include: [
+    //                 db.Measurements
+    //             ]
+    //         }]
+    //     }).then((data) => {
+    //         let recipesArr = [];
+    //         data.forEach((recipes) => {
+    //             recipesArr.push(recipes.dataValues);
+    //         });
+    //         let allRecipes = {
+    //             recipes: recipesArr
+    //         };
+    //         // console.log(allRecipes);
+    //         res.render("viewRecipePage", allRecipes);
+    //     });
+    // });
     ///////////////////////END TESTING
 
     //Root
-    app.get('/', function (req, res) {
-        // console.log(req);
-        let userInfo = req.user;
-        res.render('home', userInfo);
-    });
+    // app.get('/', function (req, res) {
+    //     // console.log(req);
+    //     let userInfo = req.user;
+    //     res.render('home', userInfo);
+    // });
 
     //Find one single recipe - include users
     app.get("/recipes/:id", function (req, res) {
@@ -94,11 +102,12 @@ module.exports = function (app) {
                     db.Measurements
                 ]
             }, {
-                model: db.Users
+                model: db.Users,
+                attributes: ["id", "username"]
             }]
         }).then(function (recipesDB) {
 
-            findAllIngredients(recipesDB, res);
+            findAllIngredients(recipesDB, res, req);
             // res.json(recipesDB);
         });
     });
@@ -147,13 +156,33 @@ module.exports = function (app) {
             res.json(recipesDB);
         });
     });
+    //Recipes API JSON Object
+    app.get("/api/recipes/all", function (req, res) {
+        let userInfo = req.user;
+        db.Recipes.findAll({
+            include: [{
+                model: db.Ingredients,
+                attributes: ["ingredientName"],
+                include: [{
+                    model: db.Measurements,
+                    attributes: ["measurement"]
+                }]
+            }, {
+                model: db.Users,
+                attributes: ["username"]
+            }],
+            attributes: ["id", "recipeName", "recipeInstructions", "createdAt"]
+        }).then(function (recipesDB) {
+            res.json(recipesDB);
+        });
+    });
 
 };
 
 //helper functions
 
 // Finds nutrition value then sends the object
-let updateNutrition = (ingredients, res, recipesDB) => {
+let updateNutrition = (ingredients, res, recipesDB, req) => {
     let apiKey = "6ebac7e6562262d5b1213134d8d7fe4a";
     let appID = "936c8444";
     let nutritionArray = [];
@@ -167,16 +196,23 @@ let updateNutrition = (ingredients, res, recipesDB) => {
 
         recipesDB = recipesDB.toJSON();
         recipesDB.nutrition = nutritionArray;
+        if (req.user) {
+            recipesDB.currentUser = {
+                id: req.user.id,
+                username: req.user.username
+            };
+        }
+
         res.json(recipesDB);
     });
 };
 // Finds all the ingredients before finding nutritional value
-let findAllIngredients = (recipesDB, res) => {
+let findAllIngredients = (recipesDB, res, req) => {
     let ingredientsArray = [];
     for (i = 0; i < recipesDB.Ingredients.length; i++) {
         ingredientsArray.push(recipesDB.Ingredients[i].Measurements[0].dataValues.measurement + " " + recipesDB.Ingredients[i].ingredientName);
     }
-    updateNutrition(ingredientsArray.join(" and "), res, recipesDB);
+    updateNutrition(ingredientsArray.join(" and "), res, recipesDB, req);
 };
 
 // Adds Ingredients to Database
