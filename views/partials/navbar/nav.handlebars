@@ -1,0 +1,69 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <form action="/recipes/" method="GET" class="navbar-form navbar-left">
+            <div class="form-group">
+                <input type="text" class="searchInput form-control" placeholder="Search by recipe name..." name='search'>
+            </div>
+            <button type="submit" class="searchBtn btn btn-primary">Search</button>
+        </form>
+        <div class="navbar-form navbar-right">
+            {{#if username}}
+            <span id='nav-user'><strong>You are logged in as: {{username}} (User Id of {{id}})</strong></span>
+            <a class='btn btn-warning' href="/logout">Logout</a> {{/if}} {{#unless username}}
+            <button type="button" class="btn btn-info btn-warning" id='register' data-toggle="modal" data-target="#registerModal">Register</button>
+            <button type="button" class="btn btn-info btn-success" id='signin' data-toggle="modal" data-target="#signinModal">Sign In</button>            {{/unless}}
+        </div>
+    </div>
+</nav>
+
+{{!-- Sign In Modal --}}
+<div id="signinModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign In</h4>
+            </div>
+            <div class="modal-body">
+                <form id="signin" name="signin" method="post" action="/signin">
+                    <label for="email">Email Address</label>
+                    <input class="form-control" name="email" type="text" required/>
+                    <label for="password">Password</label>
+                    <input class="form-control" name="password" type="password" required/>
+                    <input class="btn btn-success " type="submit" value="Sign In"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Register Modal --}}
+<div id="registerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Register</h4>
+            </div>
+            <div class="modal-body">
+                <form id="signup" name="signup" method="post" action="/signup">
+                    <label for="email">Email Address</label>
+                    <input class="form-control" name="email" type="email" required/>
+                    <label for="username">Username</label>
+                    <input class="form-control" name="username" type="text" required/>
+                    <label for="password">Password</label>
+                    <input class="form-control" name="password" type="password" required/>
+                    <input class="btn btn-warning" type="submit" value="Sign Up"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

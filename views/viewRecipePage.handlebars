@@ -1,87 +1,74 @@
-{{!--<script src="../public/assets/js/editRecipePage.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../public/assets/css/style.css">
-
-
-<body>--}}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    {{!--<img id="img-upload" alt="{{ingredients.image}}" src="{{ingredients.image}}">--}}
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon" id="sizing-addon1">Author: </span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userId}} readonly>
-                        </div>
-                        <br>
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon" id="sizing-addon1">Meal: </span>
-                            <input type="text" class="form-control" placeholder="{{recipeName}}" aria-describedby="sizing-addon1">
-                        </div>
-                        <br>
-                        <div class="col-sm-6">
-                            <button id="edit-recipe" class='btn btn-primary'>Edit recipe</button>
-                        </div>
-                    </div>
-                </div>
+{{>navbar/nav}}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
             </div>
-
-
-            <div class="col-sm-8">
-                <div class="panel panel-primary">
-                    <!-- Default panel contents -->
-                    <div class="panel-heading text-center">Measurements</div>
-
-                    <!-- Table -->
-                    <table class="table table-bordered table-hover" id="tab_logic">
-                        <thead>
-                            <tr >
-                                <th class="text-center">
-                                    {{!--#--}}Recipe Id
-                                </th>
-                                <th class="text-center">
-                                    {{!--Ingredient--}}Recipe Name
-                                </th>
-                                <th class="text-center">
-                                    {{!--Serving Size--}}Recipe Instructions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{!--just testing if stuff works will put in correct stuff soon please delete this when done--}}
-                            {{!--{{#each ingredient}}--}}{{#each recipes}}
-                                <tr>
-                                    <td>{{id}}</td>
-                                    <td>{{recipeName}}</td>
-                                    <td>{{recipeInstructions}}</td>
-                                </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <canvas id='nutrition'></canvas>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon1">Author: </span>
+                        <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userId}} readonly>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon1">Meal: </span>
+                        <input type="text" class="form-control" placeholder="{{recipeName}}" aria-describedby="sizing-addon1">
+                    </div>
+                    <br>
+                    <div class="col-sm-6">
+                        <button id="edit-recipe" class='btn btn-primary'>Edit recipe</button>
                     </div>
                 </div>
-                
             </div>
         </div>
+
+
+        <div class="col-sm-8">
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading text-center">Measurements</div>
+
+                <!-- Table -->
+                <table class="table table-bordered table-hover" id="tab_logic">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                {{!--#--}}Recipe Id
+                            </th>
+                            <th class="text-center">
+                                {{!--Ingredient--}}Recipe Name
+                            </th>
+                            <th class="text-center">
+                                {{!--Serving Size--}}Recipe Instructions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{!--just testing if stuff works will put in correct stuff soon please delete this when done--}} {{!--{{#each ingredient}}--}}{{#each
+                        recipes}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{recipeName}}</td>
+                            <td>{{recipeInstructions}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <canvas id='nutrition'></canvas>
+                </div>
+            </div>
+
+        </div>
     </div>
+</div>
 <script src="assets/js/editRecipePage.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js'></script>
 <script src='assets/js/nutrition.js'></script>
-{{!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{{!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>--}}

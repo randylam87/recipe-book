@@ -2,11 +2,11 @@
 var exports = module.exports = {};
 
 exports.signup = function(req,res){
-	res.render('signup'); 
+	res.redirect('/');
 };
 
 exports.signin = function(req,res){
-	res.render('signin'); 
+	res.redirect('/');
 };
 
 exports.home = function(req,res){
