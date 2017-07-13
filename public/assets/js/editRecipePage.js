@@ -48,9 +48,9 @@ $(document).ready( function() {
 
      var i=1;
      $("#add_row").click(function(){
-      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='salt' class='form-control input-md'  /> </td><td><select name='name"+i+"' class=form-control><option value='0' disabled>Teaspoons</option><option value='1'>1 t</option><option value='0' disabled>Tablespoons</option><option value='1'>1 T</option><option value='0' disabled>Cups</option><option value='1'>1 C</option><option value='2'>2 C</option><option value='3'>3 C</option><option value='4'>4 C</option><option value='0' disabled>Quarts</option><option value='1'>1 Q</option><option value='2'>2 Q</option><option value='3'>3 Q</option><option value='4'>4 Q</option></select></td>");
+      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input  name='measurement' type='text' placeholder='e.g. 2 cups'  class='form-control input-md'></td><td><input  name='ingredientName' type='text' placeholder='e.g. Monteray Jack Cheese'  class='form-control input-md'></td>");
 
-      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+      $('#tableRecipe').append('<tr id="addr'+(i+1)+'"></tr>');
       i++; 
     });
 
