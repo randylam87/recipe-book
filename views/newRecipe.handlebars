@@ -1,9 +1,70 @@
 {{>navbar/nav}}
 <div class="container">
   <h1>Currently logged in as: </h1>
-  <div id="userName {{id}}"><h2>{{username}} (ID: {{id}})</h2></div>
+  <div id="userName {{id}}"><h2>{{username}} <span hidden>(ID: {{id}})<span></h2></div>
 
   <div class="row">
+    <form action='/recipes' method='POST' id='newRecipe'>
+      <div class="col-md-4">
+          <div class="thumbnail">
+            <img src="https://www.papajohns.com/static-assets/a/images/web/product/pizzas/std_1topCheese_m-compressed.jpg" alt="...">
+            <div class="caption">
+              <p>text text</p>
+              <p><a href="#" class="btn btn-primary" role="button">link/upload</a>
+            </div>
+          </div>
+          <h4>Recipe Name: <input type="text" name='recipeName'  placeholder='e.g. Cheese Pizza' class="form-control" required/></h4>
+      </div>
+
+      <div class="col-md-8 column">
+          <br>
+          <table class="table table-bordered table-hover"  id='tableRecipe'>
+            <input type='text' name='userId' class='hidden' value='{{id}}'>
+            <thead>
+              <tr >
+                <th class="text-center">
+                  #
+                </th>
+                <th class="text-center">
+                  Measurement
+                </th>
+                <th class="text-center">
+                  Ingredients
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id='addr0'>
+                <td>
+                1
+                </td>
+                <td>
+                <input type="text" name='measurement' placeholder='e.g. 2 cups' class="form-control" required/>
+                </td>
+                <td>
+                <input type="text" name='ingredientName' placeholder='e.g. chopped onions' class="form-control" required/>
+                </td>
+              </tr>
+              <tr id='addr1'></tr>
+            </tbody>
+          </table>
+          <div>
+            <a id="add_row" class="pull-left">Add Row</a><a id='delete_row' class="pull-right">Delete Row</a>
+          </div>
+          <br>
+          <hr>
+          <label for='recipeInstructions'><h2>Instructions: </h2></label></br>
+          <textarea name='recipeInstructions' class='form-control' required></textarea>
+          </br>
+          <input type='submit' class='btn btn-primary'>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+  {{!-- <div class="row">
     <div class="col-sm-6 offset-sm-3">
       <form action='/recipes' method='POST' id='newRecipe'>
 
@@ -32,4 +93,4 @@
       </form>
     </div>
   </div>
-</div>
+</div> --}}
