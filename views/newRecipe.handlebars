@@ -3,7 +3,50 @@
   <h1>Currently logged in as: </h1>
   <div id="userName {{id}}"><h2>{{username}} (ID: {{id}})</h2></div>
 
-  <div class="row">
+  <div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table table-bordered table-hover" action='/recipes' method='POST' id='newRecipe'>
+        <input type='text' name='userId' class='hidden' value='{{id}}'>
+				<thead>
+					<tr >
+						<th class="text-center">
+							{{id}}
+						</th>
+						<th class="text-center" for='recipeName'>
+							Ingredients
+						</th>
+						<th class="text-center" for='measurement'>
+							Measurement
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id='addr0'>
+						<td>
+						1
+						</td>
+						<td>
+						<input type="text" name='recipeName'  placeholder='e.g. salt' class="form-control" required/>
+						</td>
+						<td>
+						<input type="text" name='measurement' placeholder='e.g. 2 cups' class="form-control" required/>
+						</td>
+					</tr>
+          <tr id='addr1'></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<a id="add_row" class="pull-left">Add Row</a><a id='delete_row' class="pull-right">Delete Row</a>
+  <input type='submit' class='btn btn-primary'>
+</div>
+
+
+
+
+
+
+  {{!-- <div class="row">
     <div class="col-sm-6 offset-sm-3">
       <form action='/recipes' method='POST' id='newRecipe'>
 
@@ -32,4 +75,4 @@
       </form>
     </div>
   </div>
-</div>
+</div> --}}
