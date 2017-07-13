@@ -50,7 +50,7 @@ $(document).ready( function() {
      $("#add_row").click(function(){
       $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='salt' class='form-control input-md'  /> </td><td><select name='name"+i+"' class=form-control><option value='0' disabled>Teaspoons</option><option value='1'>1 t</option><option value='0' disabled>Tablespoons</option><option value='1'>1 T</option><option value='0' disabled>Cups</option><option value='1'>1 C</option><option value='2'>2 C</option><option value='3'>3 C</option><option value='4'>4 C</option><option value='0' disabled>Quarts</option><option value='1'>1 Q</option><option value='2'>2 Q</option><option value='3'>3 Q</option><option value='4'>4 Q</option></select></td>");
 
-      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+      $('#newRecipe').append('<tr id="addr'+(i+1)+'"></tr>');
       i++; 
     });
 
