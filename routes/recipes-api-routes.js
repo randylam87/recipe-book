@@ -21,8 +21,8 @@ module.exports = function (app) {
         }).then(function (queryResult) {
             let hbsObject = {
                 recipe: queryResult,
-            }
-            addUserToHbsObj(req,hbsObject);
+            };
+            addUserToHbsObj(req, hbsObject);
             // res.json(hbsObject);
             // console.log(hbsObject)
             res.render('home', hbsObject);
@@ -46,8 +46,8 @@ module.exports = function (app) {
         }).then(function (queryResult) {
             let hbsObject = {
                 query: queryResult,
-            }
-            addUserToHbsObj(req,hbsObject);
+            };
+            addUserToHbsObj(req, hbsObject);
             // res.json(hbsObject);
             // console.log(hbsObject)
             res.json(hbsObject);
@@ -166,7 +166,6 @@ module.exports = function (app) {
         }).then(function (recipesDB) {
 
             findAllIngredients(recipesDB, res, req);
-            // res.json(recipesDB);
         });
     });
 
@@ -236,6 +235,36 @@ module.exports = function (app) {
         });
     });
 
+    //JSON for a single recipe
+    app.get("/json/:id", function (req, res) {
+        // console.log(req.params);
+        db.Recipes.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: [{
+                model: db.Ingredients,
+                include: [
+                    db.Measurements
+                ]
+            }, {
+                model: db.Users,
+                attributes: ["id", "username"]
+            }]
+        }).then(function (recipesDB) {
+            // console.log(recipesDB);
+            recipesDB = recipesDB.toJSON();
+            if (req.user) {
+                recipesDB.currentUser = {
+                    id: req.user.id,
+                    username: req.user.username
+                };
+            }
+            res.json(recipesDB);
+        });
+    });
+
+
 };
 
 //helper functions
@@ -246,12 +275,19 @@ let updateNutrition = (ingredients, res, recipesDB, req) => {
     let appID = "936c8444";
     let nutritionArray = [];
     request(`https://api.edamam.com/api/nutrition-data?app_id=${appID}&app_key=${apiKey}&ingr=${ingredients}`, function (error, response, body) {
-
         //Nutrition Array Order = Calories, Fat, Protein, Carbs
-        nutritionArray.push(JSON.parse(body).calories);
-        nutritionArray.push(JSON.parse(body).totalNutrients.FAT.quantity);
-        nutritionArray.push(JSON.parse(body).totalNutrients.PROCNT.quantity);
-        nutritionArray.push(JSON.parse(body).totalNutrients.CHOCDF.quantity);
+        nutritionArray.push({
+            Calories: JSON.parse(body).calories
+        });
+        nutritionArray.push({
+            Fat: JSON.parse(body).totalNutrients.FAT.quantity
+        });
+        nutritionArray.push({
+            Protein: JSON.parse(body).totalNutrients.PROCNT.quantity
+        });
+        nutritionArray.push({
+            Carbs: JSON.parse(body).totalNutrients.CHOCDF.quantity
+        });
 
         recipesDB = recipesDB.toJSON();
         recipesDB.nutrition = nutritionArray;
@@ -261,8 +297,7 @@ let updateNutrition = (ingredients, res, recipesDB, req) => {
                 username: req.user.username
             };
         }
-
-        res.json(recipesDB);
+        res.render("viewRecipePage", recipesDB);
     });
 };
 // Finds all the ingredients before finding nutritional value
