@@ -1,92 +1,35 @@
 {{>navbar/nav}}
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label>Upload Image</label>
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <span class="btn btn-default btn-file">
-                            Browse... <input type="file" id="imgInp">
-                        </span>
-                    </span>
-                    <input type="text" class="form-control" readonly>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon" id="sizing-addon1">Author: </span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userName}} readonly>
-                        </div>
-                        <br>
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon" id="sizing-addon1">Meal: </span>
-                            <input type="text" class="form-control" placeholder="name of your meal" aria-describedby="sizing-addon1">
-                        </div>
-                        <br>
-                        <div class="col-sm-6">
-                            <button id="save-recipe">Save recipe</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <h1>Currently logged in as: </h1>
+  <div id="userName {{id}}"><h2>{{username}} (ID: {{id}})</h2></div>
 
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <form action='/recipes' method='POST' id='newRecipe'>
 
-            <div class="col-sm-8">
-                <div class="panel panel-default">
-                    <!-- Default panel contents -->
-                    <div class="panel-heading text-center">Measurements</div>
+        <input type='text' name='userId' class='hidden' value='{{id}}'>
 
-                    <!-- Table -->
-                    <table class="table table-bordered table-hover" id="tab_logic">
-                        <thead>
-                            <tr>
-                                <th class="text-center">
-                                    #
-                                </th>
-                                <th class="text-center">
-                                    Ingredient
-                                </th>
-                                <th class="text-center">
-                                    Serving Size
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id='addr0'>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    <input type="text" name='checkbox' placeholder='salt' class="form-control" />
-                                </td>
-                                <td>
-                                    <select name="mail10" class="form-control">
-                                    <option value='0' disabled>Teaspoons</option>
-                                    <option value='1'>1 t</option>
-                                    <option value='0' disabled>Tablespoons</option>
-                                    <option value='1'>1 T</option>
-                                    <option value='0' disabled>Cups</option>
-                                    <option value='1'>1 C</option>
-                                    <option value='2'>2 C</option>
-                                    <option value='3'>3 C</option>
-                                    <option value='4'>4 C</option>
-                                    <option value='0' disabled>Quarts</option>
-                                    <option value='1'>1 Q</option>
-                                    <option value='2'>2 Q</option>
-                                    <option value='3'>3 Q</option>
-                                    <option value='4'>4 Q</option>
-                                </select>
-                                </td>
-                            </tr>
-                            <tr id='addr1'></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <a id="add_row" class="pull-left">Add Row</a><a id='delete_row' class="pull-right">Delete Row</a>
-        </div>
+        <label for='recipeName'><h2>Recipe Name: </h2></label>
+        <input type='text' name='recipeName' class='form-control' required>
+
+        <label for='measurement'><h2>Measurement: </h2></label>
+        <input type='text' name='measurement' class='form-control' required>
+
+        <label for='ingredientName'><h2>Ingredients: </h2></label>
+        <input type='text' name='ingredientName' class='form-control' required>
+
+        <label for='measurement'><h2>Measurement: </h2></label>
+        <input type='text' name='measurement' class='form-control' required>
+
+        <label for='ingredientName'><h2>Ingredients: </h2></label>
+        <input type='text' name='ingredientName' class='form-control' required>
+
+        <label for='recipeInstructions'><h2>Instructions: </h2></label></br>
+        <textarea name='recipeInstructions' class='form-control' required></textarea>
+        </br>
+
+        <input type='submit' class='btn btn-primary'>
+      </form>
     </div>
-    <script src="assets/js/editRecipePage.js"></script>
-    {{!--
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
+  </div>
+</div>
