@@ -185,8 +185,12 @@ module.exports = function (app) {
             recipeInstructions: req.body.recipeInstructions
         }).then((data) => {
             //looping through and creating table row for each ingredient and measurement
-            for (i = 0; i < req.body.ingredientName.length; i++) {
-                updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
+            if (Array.isArray(req.body.ingredientName)) {
+                for (i = 0; i < req.body.ingredientName.length; i++) {
+                    updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
+                }
+            } else {
+                updateIngredients(data, req.body.ingredientName, req.body.measurement, req, res);
             }
             res.redirect('/new');
         });
