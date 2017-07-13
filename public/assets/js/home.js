@@ -16,3 +16,8 @@ $.get('/', (data) => {
         $('#pagination').append(paginationButton);
     }
 });
+
+$('.recipes').on('click',function() {
+    let recipeId = $(this).attr('recipe-id');
+    window.location.href=`/recipes/${recipeId}`;
+});
