@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 8080;
 const passport = require('passport');
 const env = require('dotenv').load();
 const db = require("./models");
+
 ////Middleware
 //BodyParser
 app.use(bodyParser.json());

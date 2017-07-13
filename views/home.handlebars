@@ -3,19 +3,18 @@
   <h1>Cookbook</h1>
   <hr> {{!-- test buttons --}}
   <div class='btn-grp'>
-    <a class='btn btn-info' href="/api/recipes/all">View All Recipes</a> {{#if username}}
+    <a class='btn btn-info' href="/api/recipes/all">View All Recipes</a> {{#if currentUser}}
     <a class='btn btn-primary' href="/new">New Recipe</a> {{/if}}
-    <hr> {{#if username}}
+    <hr> {{#if currentUser}}
     <a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a> {{/if}}
     <hr>
   </div>
   {{!-- end test buttons --}}
   <div id='viewMoreRecipes'>
-{{!-- JS generated buttons are appended here --}}
+    {{!-- JS generated buttons are appended here --}}
   </div>
-
   <div class="panel panel-primary">
-    <div class="panel-heading text-center">Total Recipes: <span id='numOfRecipes'></span></div>
+    <div class="panel-heading">Total Recipes: <span id='numOfRecipes'></span><span id='pagination' class='pull-right'>Pagination</span></div>
     <table class="table table-condensed text-center">
       <thead>
         <th class="text-center">
@@ -30,15 +29,15 @@
         </tr>
       </thead>
       <tbody class='text-center'>
-        {{#each recipes}}
-        <tr class='hidden recipes'>
-          <td>{{username}}</td>
+        {{#each recipe}}
+        <tr class='recipes' recipe-id='{{id}}'>
+          <td>{{User.username}}</td>
           <td>{{recipeName}}</td>
-          <td>{{ingredientName}}</td>
+          <td>{{#each Ingredients}}{{ingredientName}}, {{/each}}</td>
         </tr>
         {{/each}}
       </tbody>
   </div>
 </div>
 </table>
-<script src='assets/js/home.js' </div>
+<script src='assets/js/home.js'></script>
