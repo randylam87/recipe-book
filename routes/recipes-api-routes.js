@@ -20,12 +20,37 @@ module.exports = function (app) {
             limit: 10
         }).then(function (queryResult) {
             let hbsObject = {
+                recipe: queryResult,
+            }
+            addUserToHbsObj(req,hbsObject);
+            // res.json(hbsObject);
+            // console.log(hbsObject)
+            res.render('home', hbsObject);
+        });
+    });
+    //test
+    app.get("/test", function (req, res) {
+        let userInfo = req.user;
+        db.Recipes.findAll({
+            include: [{
+                model: db.Ingredients,
+                include: [
+                    db.Measurements
+                ]
+            }, {
+                model: db.Users,
+                attributes: ["id", "username"]
+            }]
+        }, {
+            limit: 10
+        }).then(function (queryResult) {
+            let hbsObject = {
                 query: queryResult,
             }
             addUserToHbsObj(req,hbsObject);
             // res.json(hbsObject);
-            console.log(hbsObject)
-            res.render('home', hbsObject);
+            // console.log(hbsObject)
+            res.json(hbsObject);
         });
     });
 
@@ -163,6 +188,7 @@ module.exports = function (app) {
             for (i = 0; i < req.body.ingredientName.length; i++) {
                 updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
             }
+            res.redirect('/new');
         });
     });
 
@@ -253,7 +279,7 @@ let updateIngredients = (data, ingredient, measurement, req, res) => {
         RecipeId: data.dataValues.id,
         ingredientName: ingredient
     }).then((data) => {
-        console.log(data);
+        // console.log(data);
         db.Measurements.create({
             IngredientId: data.dataValues.id,
             measurement: measurement

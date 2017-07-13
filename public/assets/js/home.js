@@ -1,18 +1,18 @@
 $.get('/', (data) => {
+    let numOfButtons;
     let numOfRecipes = $('.recipes').length;
     let paginate = (limit) => {
-        let numOfButtons = Math.ceil(numOfRecipes / limit);
+        numOfButtons = Math.ceil(numOfRecipes / limit);
         return numOfButtons;
     };
+    //defines how many searches will be displayed
     paginate(10);
 
     $('#numOfRecipes').html(numOfRecipes);
-
+    let paginationButton;
     for(let i =1; i<numOfButtons+1;i++){
-        let paginationButton = $(`<div class='pagination-page-${{num}} pagination-button'`);
-        paginationButton.text(num);
+        paginationButton = $(`<button class='btn btn-sm btn-primary page-${i} pagination-button'>`);
+        paginationButton.text(i);
+        $('#pagination').append(paginationButton);
     }
-    console.log(numOfButtons);
-    console.log(numOfRecipes)
-    $('#pagination').append(paginationButton);
 });

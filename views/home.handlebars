@@ -29,15 +29,15 @@
         </tr>
       </thead>
       <tbody class='text-center'>
-        {{#each recipes}}
-        <tr class='hidden recipes'>
-          <td>{{username}}</td>
+        {{#each recipe}}
+        <tr class='recipes'>
+          <td>{{User.username}}</td>
           <td>{{recipeName}}</td>
-          <td>{{ingredientName}}</td>
+          <td>{{#each Ingredients}}{{ingredientName}}, {{/each}}</td>
         </tr>
         {{/each}}
       </tbody>
   </div>
 </div>
 </table>
-<script src='assets/js/home.js' </div>
+<script src='assets/js/home.js'></script>
