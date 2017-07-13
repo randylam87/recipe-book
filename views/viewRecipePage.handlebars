@@ -1,74 +1,39 @@
 {{>navbar/nav}}
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="sizing-addon1">Author: </span>
-                        <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value={{userId}} readonly>
-                    </div>
-                    <br>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="sizing-addon1">Meal: </span>
-                        <input type="text" class="form-control" placeholder="{{recipeName}}" aria-describedby="sizing-addon1">
-                    </div>
-                    <br>
-                    <div class="col-sm-6">
-                        <button id="edit-recipe" class='btn btn-primary'>Edit recipe</button>
-                    </div>
-                </div>
-            </div>
+    <div class="singleRecipe">
+   
+        <div class="imgBox col-sm-6 col-sm-offset-3">
+          <img class="img-responsive recipeImg" src="https://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/d/36/d36ef710-4e7b-5bcb-bc80-04777cb603f5/5834c8cb81b70.image.jpg?resize=1200%2C800" class="img-responsive">
         </div>
-
-
-        <div class="col-sm-8">
-            <div class="panel panel-primary">
-                <!-- Default panel contents -->
-                <div class="panel-heading text-center">Measurements</div>
-
-                <!-- Table -->
-                <table class="table table-bordered table-hover" id="tab_logic">
-                    <        {{!--#--}}Recipe Id
-                            </th>
-                        thead>
-                        <tr>
-                            <th class="text-center">
-                            <th class="text-center">
-                                {{!--Ingredient--}}Recipe Name
-                            </th>
-                            <th class="text-center">
-                                {{!--Serving Size--}}Recipe Instructions
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{!--just testing if stuff works will put in correct stuff soon please delete this when done--}} {{!--{{#each ingredient}}--}}{{#each
-                        recipes}}
-                        <tr>
-                            <td>{{id}}</td>
-                            <td>{{recipeName}}</td>
-                            <td>{{recipeInstructions}}</td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <canvas id='nutrition'></canvas>
-                </div>
-            </div>
-
+    
+         
+        <div class="instructionBox col-sm-6 col-sm-offset-3 text-center">
+             <h1 class="text-success recipeName" data-recipeId="{{id}}">{{User.username}}'s {{recipeName}} Recipe</h1> 
+             <h2>Instructions</h2>
+             <h4 class="text-danger">{{recipeInstructions}}</h4>   
+        </div>
+         
+    
+        <div class="ingredientBox col-sm-6 col-sm-offset-3">
+        <h2 class="text-center">Ingredients</h2>
+        <ul class="list-unstyled text-center">
+        {{#each Ingredients}} 
+        <li>{{#each Measurements}} {{measurement}} {{/each}}  {{ingredientName}}</li>
+        <br>
+        {{/each}}   
+        </ul>
+        </div>
+    
+        
+        <div class="nutritionBox col-sm-6 col-sm-offset-3">
+        <div class="col-sm-10 col-sm-offset-1" id="nutritionDiv" data-nutrition="[{{nutrition.1.Fat}}, {{nutrition.3.Carbs}}, {{nutrition.2.Protein}}]">
+            <canvas id='nutrition'></canvas>
+            <p class="text-center">Total Calories: {{nutrition.0.Calories}}</p>
+        
         </div>
     </div>
 </div>
-<script src="assets/js/editRecipePage.js"></script>
+</div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js'></script>
-<script src='assets/js/nutrition.js'></script>
-{{!--
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</body>--}}
+<script src='../assets/js/nutrition.js'></script>
+<script src="../assets/js/singleRecipe.js"></script>
