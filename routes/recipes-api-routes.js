@@ -55,7 +55,8 @@ module.exports = function (app) {
                 ]
             }]
         }).then((recipesDB) => {
-            res.render("editRecipePage");
+            let userInfo = req.user;
+            res.render("editRecipePage", userInfo);
         });
     });
 
