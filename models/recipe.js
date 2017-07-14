@@ -12,6 +12,24 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false,
       len: [1]
+    },
+    prepTime: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1]
+    },
+    cookTime: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1]
+    },
+    notes: {
+      type: DataTypes.TEXT,
+      len: [1]
+    },
+    recipeImg: {
+      type: DataTypes.TEXT,
+      len: [1]
     }
   });
 

@@ -1,39 +1,26 @@
 {{>navbar/nav}}
 <div class="container">
-  <h1>Cookbook</h1>
-  <hr> {{!-- test buttons --}}
-  <div class='btn-grp'>
-    <a class='btn btn-info' href="/api/recipes/all">View All Recipes</a> {{#if currentUser}}
-    <a class='btn btn-primary' href="/new">New Recipe</a> {{/if}}
-    <hr> {{#if currentUser}}
-    <a class='btn btn-danger' href="/edit">Edit Recipe (Carlos) </a> {{/if}}
-    <hr>
-  </div>
-  {{!-- end test buttons --}}
-  <div id='viewMoreRecipes'>
-    {{!-- JS generated buttons are appended here --}}
-  </div>
+  <h1 class='title-white'>Cookbook</h1>
+  {{#if currentUser}} <a class='btn btn-sm btn-danger' href="/new">Post new recipe</a><br> {{/if}}
   <div class="panel panel-primary">
-    <div class="panel-heading">Total Recipes: <span id='numOfRecipes'></span><span id='pagination' class='pull-right'>Pagination</span></div>
+    <div class="panel-heading">Total Recipes: <span id='numOfRecipes'></span></div>
     <table class="table table-condensed text-center">
-      <thead>
-        <th class="text-center">
-          Author
-        </th>
-        <th class="text-center">
-          Recipe Name
-        </th>
-        <th class="text-center">
-          Ingredients
-        </th>
+      <thead class="text-center">
+        <th></th>
+        <th>Author</th>
+        <th>Recipe Name</th>
+        <th>Prep Time</th>
+        <th>Cook Time</th>
         </tr>
       </thead>
       <tbody class='text-center'>
         {{#each recipe}}
         <tr class='recipes' recipe-id='{{id}}'>
+          <td><a href="{{recipeImg}}"></a></td>
           <td>{{User.username}}</td>
           <td>{{recipeName}}</td>
-          <td>{{#each Ingredients}}{{ingredientName}}, {{/each}}</td>
+          <td>{{prepTime}}</td>
+          <td>{{cookTime}}</td>
         </tr>
         {{/each}}
       </tbody>

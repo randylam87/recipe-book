@@ -182,7 +182,10 @@ module.exports = function (app) {
         db.Recipes.create({
             UserId: req.body.userId,
             recipeName: req.body.recipeName,
-            recipeInstructions: req.body.recipeInstructions
+            recipeInstructions: req.body.recipeInstructions,
+            prepTime: req.body.prepTime,
+            cookTime: req.body.cookTime,
+            notes: req.body.notes
         }).then((data) => {
             //looping through and creating table row for each ingredient and measurement
             if (Array.isArray(req.body.ingredientName)) {

@@ -1,17 +1,18 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
+        <a class="navbar-brand" href="/">Home</a>
         <form action="/recipes/" method="GET" class="navbar-form navbar-left">
             <div class="form-group">
                 <input type="text" class="searchInput form-control" placeholder="Search by recipe name..." name='search'>
             </div>
-            <button type="submit" class="searchBtn btn btn-primary">Search</button>
+            <button type="submit" class="searchBtn btn btn-sm btn-primary">Search</button>
         </form>
         <div class="navbar-form navbar-right">
             {{#if currentUser}}
-            <span id='nav-user'><strong>You are logged in as: {{currentUser.currentUsername}} (User Id of {{currentUser.currentUserId}})</strong></span>
-            <a class='btn btn-warning' href="/logout">Logout</a> {{/if}} {{#unless currentUser}}
-            <button type="button" class="btn btn-info btn-warning" id='register' data-toggle="modal" data-target="#registerModal">Register</button>
-            <button type="button" class="btn btn-info btn-success" id='signin' data-toggle="modal" data-target="#signinModal">Sign In</button>            {{/unless}}
+            <span id='nav-user'><strong>Welcome {{currentUser.currentUsername}}!</strong></span>
+            <a class='btn btn-sm btn-warning' href="/logout">Logout</a> {{/if}} {{#unless currentUser}}
+            <button type="button" class="btn btn-sm btn-info btn-warning" id='register' data-toggle="modal" data-target="#registerModal">Register</button>
+            <button type="button" class="btn btn-sm btn-info btn-success" id='signin' data-toggle="modal" data-target="#signinModal">Sign In</button>            {{/unless}}
         </div>
     </div>
 </nav>
