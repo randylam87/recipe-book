@@ -9,10 +9,10 @@
         </form>
         <div class="navbar-form navbar-right">
             {{#if currentUser}}
-            <span id='nav-user'><strong>Welcome {{currentUser.currentUsername}}!</strong></span>
+            <span id='nav-user' user-id='{{currentUser.currentUserId}}'><strong>Welcome {{currentUser.currentUsername}}!</strong></span>
             <a class='btn btn-sm btn-warning' href="/logout">Logout</a> {{/if}} {{#unless currentUser}}
-            <button type="button" class="btn btn-sm btn-info btn-warning" id='register' data-toggle="modal" data-target="#registerModal">Register</button>
-            <button type="button" class="btn btn-sm btn-info btn-success" id='signin' data-toggle="modal" data-target="#signinModal">Sign In</button>            {{/unless}}
+            <button type="button" class="btn btn-sm btn-warning" id='register' data-toggle="modal" data-target="#registerModal">Register</button>
+            <button type="button" class="btn btn-sm  btn-success" id='signin' data-toggle="modal" data-target="#signinModal">Sign In</button>{{/unless}}
         </div>
     </div>
 </nav>
@@ -30,7 +30,7 @@
                     <label for="email">Email Address</label>
                     <input class="form-control" name="email" type="text" required/>
                     <label for="password">Password</label>
-                    <input class="form-control" name="password" type="password" required/>
+                    <input class="form-control" name="password" type="password" required/><br>
                     <input class="btn btn-success " type="submit" value="Sign In" />
                 </form>
             </div>

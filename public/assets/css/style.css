@@ -60,7 +60,7 @@ body {
     width: 100%;
 }
 
-.singleRecipe {
+.singleRecipe, .recipe-img   {
     background-color: white;
     border-radius: 15px;
 }
@@ -94,4 +94,13 @@ body {
 .nutritionBox {
     background-color: white;
     border-radius: 0 0 15px 15px;
+}
+
+.input-space {
+    padding-right: 5px;
+}
+
+.background-transparent-black {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 15px;
 }
