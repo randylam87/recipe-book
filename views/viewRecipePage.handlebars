@@ -2,13 +2,13 @@
 <div class="container">
     <div class="singleRecipe">
         <div class="imgBox col-sm-10 col-sm-offset-1">
-            <img class="img-responsive recipeImg" src="https://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/d/36/d36ef710-4e7b-5bcb-bc80-04777cb603f5/5834c8cb81b70.image.jpg?resize=1200%2C800"
-                class="img-responsive">
+            {{#if recipeImg}}
+            <img src="{{recipeImg}}" alt="default" class='img-responsive recipeImg center-block'> {{else}}
+            <img src="../assets/images/recipe-img-stock.jpeg" alt="default" class='img-responsive recipeImg'> {{/if}}
         </div>
         <div class="instructionBox col-sm-10 col-sm-offset-1 text-center">
-            <h1 class="text-success recipeName" data-recipeId="{{id}}">{{User.username}}'s {{recipeName}} Recipe</h1>
+            <h1 class="text-success recipeName" data-recipeId="{{id}}">{{recipeName}} Recipe by {{User.username}}</h1>
             {{#if match.match}}
-
 
             <!-- Trigger the modal with a button -->
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit Modal</button>
@@ -25,11 +25,11 @@
                         </div>
                         <div class="modal-body">
 
-                            <div class "row">
+                            <div class="row">
                                 <form action='/recipes' method='POST' id='newRecipe'>
                                     <div class='col-md-4 title-white'>
                                         <h4>Recipe Name: <input type="text" name='recipeName' placeholder='e.g. Cheese Pizza'
-                                                class="form-control" required/></h4>
+                                                value="{{recipeName}}" class="form-control" required/></h4>
                                         <table>
                                             <thead>
                                                 <tr>
@@ -39,73 +39,62 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name='prepTime' placeholder='30 minutes' class="form-control"
-                                                            required/></td>
-                                                    <td><input type="text" name='cookTime' placeholder='2 hours' class="form-control"
-                                                            required/></td>
+                                                    <td><input type="text" name='prepTime' placeholder='30 minutes' value="{{prepTime}}"
+                                                            class="form-control input-space" required/></td>
+                                                    <td><input type="text" name='cookTime' placeholder='2 hours' value="{{cookTime}}"
+                                                            class="form-control" required/></td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table><br>
                                         <div>
-                                            <img src="https://www.papajohns.com/static-assets/a/images/web/product/pizzas/std_1topCheese_m-compressed.jpg" alt="default"
-                                                class='img-responsive'>
-                                        </div>
-                                        <p><a href="#" class="btn btn-primary" role="button">Link photo URL</a>
+                                            {{#if recipeImg}}
+                                            <img src="{{recipeImg}}" alt="default" class='img-responsive recipe-img'> {{else}}
+                                            <img src="../assets/images/recipe-img-stock.jpeg" alt="default" class='img-responsive recipe-img'>                                            {{/if}}
+                                        </div><br>
+                                        <label class='title-white' for='recipeImg'>Link photo URL</label>
+                                        <input type='text' id='recipe-url' name='recipeImg' value="{{recipeImg}}" placeholder='optional' class='form-control'>
                                     </div>
 
                                     <div class="col-md-8 column">
-                                        <table class="table table-bordered table-hover" id='tableRecipe' style="background-color:#fff;">
+                                        <table class="table" id='tableRecipe'>
                                             <input type='text' name='userId' class='hidden' value='{{id}}'>
                                             <thead>
-                                                <tr>
+                                                <tr class='title-white'>
                                                     <th class="text-center">#</th>
                                                     <th class="text-center">Measurement</th>
                                                     <th class="text-center">Ingredients</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr id='addr0'>
-                                                    <td>1</td>
-                                                    <td><input type="text" name='measurement' placeholder='e.g. 2 cups' class="form-control"
+                                            <tbody class='title-white ingredientsTable'>
+                                                {{#each Ingredients}}
+                                                <tr class='ingredientRow'>
+                                                    <td>{{inc @index}}</td>
+                                                    <td><input type="text" name='measurement' placeholder='e.g. 2 cups' {{#each
+                                                            Measurements}}value="{{measurement}}" {{/each}} class="form-control"
                                                             required/></td>
                                                     <td><input type="text" name='ingredientName' placeholder='e.g. chopped onions'
-                                                            class="form-control" required/></td>
+                                                            value="{{ingredientName}}" class="form-control" required/></td>
                                                 </tr>
-                                                <tr id='addr1'></tr>
+                                                {{/each}}
                                             </tbody>
                                         </table>
-                                        <a id="add_row" class="pull-left btn btn-primary">Add Ingredient</a><a id='delete_row'
-                                            class="pull-right btn btn-primary">Delete Ingredient</a>
+                                        <hr>
+                                        <a id="add_row" class="pull-left btn btn-success">Add Ingredient</a><a id='delete_row'
+                                            class="pull-right btn btn-danger">Delete Ingredient</a>
                                         <br>
                                         <hr>
                                         <div id='instructions'>
                                             <label class='title-white' for='recipeInstructions'>Instructions:</label>
-                                            <hr>
-                                            <button type='button' class="btn btn-sm btn-warning" id='new-step'>Add New Step</button>
-                                            <textarea name='recipeInstructions' class='form-control' required></textarea>
+                                            <textarea name='recipeInstructions' class='form-control' required>{{recipeInstructions}}</textarea>
                                         </div>
-
+                                        <hr>
+                                        <label for='notes' class='title-white'>Notes (Optional):</label>
+                                        <textarea name='notes' class='form-control'>{{notes}}</textarea><br>
+                                        <input type='submit' class='btn btn-primary'>
                                     </div>
-                                    <hr>
-                                    <label for='notes'>Notes (Optional):</label>
-                                    <textarea name='notes' class='form-control'></textarea>
-                                    <input type='submit' class='btn btn-primary'>
                                 </form>
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            <hr>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -114,14 +103,6 @@
 
                 </div>
             </div>
-
-
-
-
-
-
-
-
             {{/if}}
             <h2 class="text-primary">Instructions</h2>
             <h4 class="text-danger">{{recipeInstructions}}</h4>
@@ -147,4 +128,3 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js'></script>
 <script src='../assets/js/nutrition.js'></script>
 <script src="../assets/js/singleRecipe.js"></script>
-<script src="../assets/js/editRecipePage.js"></script>

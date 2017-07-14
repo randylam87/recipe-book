@@ -164,7 +164,6 @@ module.exports = function (app) {
                 attributes: ["id", "username"]
             }]
         }).then(function (recipesDB) {
-
             findAllIngredients(recipesDB, res, req);
         });
     });
@@ -178,26 +177,48 @@ module.exports = function (app) {
 
     //Save a new recipe
     app.post("/recipes", isLoggedIn, function (req, res) {
-        console.log(req.body);
-        db.Recipes.create({
-            UserId: req.body.userId,
-            recipeName: req.body.recipeName,
-            recipeInstructions: req.body.recipeInstructions,
-            prepTime: req.body.prepTime,
-            cookTime: req.body.cookTime,
-            notes: req.body.notes,
-            recipeImg: req.body.recipeImg
-        }).then((data) => {
-            //looping through and creating table row for each ingredient and measurement
-            if (Array.isArray(req.body.ingredientName)) {
-                for (i = 0; i < req.body.ingredientName.length; i++) {
-                    updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
+
+        if (req.body.recipeImg) {
+            db.Recipes.create({
+                UserId: req.body.userId,
+                recipeName: req.body.recipeName,
+                recipeInstructions: req.body.recipeInstructions,
+                prepTime: req.body.prepTime,
+                cookTime: req.body.cookTime,
+                notes: req.body.notes,
+                recipeImg: req.body.recipeImg
+            }).then((data) => {
+                //looping through and creating table row for each ingredient and measurement
+                if (Array.isArray(req.body.ingredientName)) {
+                    for (i = 0; i < req.body.ingredientName.length; i++) {
+                        updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
+                    }
+                } else {
+                    updateIngredients(data, req.body.ingredientName, req.body.measurement, req, res);
                 }
-            } else {
-                updateIngredients(data, req.body.ingredientName, req.body.measurement, req, res);
-            }
-            res.redirect('/new');
-        });
+                res.redirect('/new');
+            });
+        } else {
+            db.Recipes.create({
+                UserId: req.body.userId,
+                recipeName: req.body.recipeName,
+                recipeInstructions: req.body.recipeInstructions,
+                prepTime: req.body.prepTime,
+                cookTime: req.body.cookTime,
+                notes: req.body.notes
+            }).then((data) => {
+                //looping through and creating table row for each ingredient and measurement
+                if (Array.isArray(req.body.ingredientName)) {
+                    for (i = 0; i < req.body.ingredientName.length; i++) {
+                        updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
+                    }
+                } else {
+                    updateIngredients(data, req.body.ingredientName, req.body.measurement, req, res);
+                }
+                res.redirect('/new');
+            });
+        }
+
     });
 
     //Delete one single recipe
@@ -219,26 +240,6 @@ module.exports = function (app) {
                     id: req.body.id
                 }
             }).then(function (recipesDB) {
-            res.json(recipesDB);
-        });
-    });
-    //Recipes API JSON Object
-    app.get("/api/recipes/all", function (req, res) {
-        let userInfo = req.user;
-        db.Recipes.findAll({
-            include: [{
-                model: db.Ingredients,
-                attributes: ["ingredientName"],
-                include: [{
-                    model: db.Measurements,
-                    attributes: ["measurement"]
-                }]
-            }, {
-                model: db.Users,
-                attributes: ["username"]
-            }],
-            attributes: ["id", "recipeName", "recipeInstructions", "createdAt"]
-        }).then(function (recipesDB) {
             res.json(recipesDB);
         });
     });
