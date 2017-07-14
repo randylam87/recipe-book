@@ -2,11 +2,11 @@
 //Shares a many:many relationship with ingredients
 module.exports = (sequelize, DataTypes) => {
   const Measurements = sequelize.define('Measurements', {
-    Id: {
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
-    },
+    // Id: {
+    //   autoIncrement: true,
+    //   primaryKey: true,
+    //   type: DataTypes.INTEGER
+    // },
     measurement: {
       type: DataTypes.STRING,
       allowNull: false,
