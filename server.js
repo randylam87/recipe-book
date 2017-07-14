@@ -46,6 +46,12 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
+let Handlebars = require('handlebars');
+Handlebars.registerHelper("inc", function(value, options)
+{
+    return parseInt(value) + 1;
+});
+
 //Routes
 var authRoute = require('./routes/auth.js')(app, passport);
 require("./routes/recipes-api-routes.js")(app);
