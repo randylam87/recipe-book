@@ -107,5 +107,24 @@ body {
 
 .recipe-img-container {
     width: 200px;
+    height: 150px;
     margin: 0 auto;
+    position: relative;
+    background-size: cover; 
+}
+
+.recipe-img {
+    border-radius: 15px;
+    background-size: cover; 
+}
+.recipe-name {
+    top: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.author-name {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
 }
