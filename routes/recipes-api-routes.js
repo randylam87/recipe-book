@@ -242,36 +242,6 @@ module.exports = function (app) {
         });
     });
 
-    //JSON for a single recipe
-    app.get("/json/:id", function (req, res) {
-        // console.log(req.params);
-        db.Recipes.findOne({
-            where: {
-                id: req.params.id
-            },
-            include: [{
-                model: db.Ingredients,
-                include: [
-                    db.Measurements
-                ]
-            }, {
-                model: db.Users,
-                attributes: ["id", "username"]
-            }]
-        }).then(function (recipesDB) {
-            // console.log(recipesDB);
-            recipesDB = recipesDB.toJSON();
-            if (req.user) {
-                recipesDB.currentUser = {
-                    id: req.user.id,
-                    username: req.user.username
-                };
-            }
-            res.json(recipesDB);
-        });
-    });
-
-
 };
 
 //helper functions
@@ -298,12 +268,13 @@ let updateNutrition = (ingredients, res, recipesDB, req) => {
 
         recipesDB = recipesDB.toJSON();
         recipesDB.nutrition = nutritionArray;
-        if (req.user) {
-            recipesDB.currentUser = {
-                id: req.user.id,
-                username: req.user.username
+        //IF LOGGED IN & USER IS ALSO THE AUTHOR
+        if (req.user && req.user.id == recipesDB.User.id) {
+            recipesDB.match = {
+                match: true
             };
         }
+        console.log(recipesDB);
         res.render("viewRecipePage", recipesDB);
     });
 };

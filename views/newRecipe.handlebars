@@ -1,66 +1,67 @@
 {{>navbar/nav}}
 <div class="container">
-<div class"row">
-  <form action='/recipes' method='POST' id='newRecipe'>
-    <div class='col-md-4 title-white'>
-      <h4>Recipe Name: <input type="text" name='recipeName' placeholder='e.g. Cheese Pizza' class="form-control" required/></h4>
-      <table>
-        <thead>
-          <tr>
-            <th>Prep Time</th>
-            <th>Cook Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" name='prepTime' placeholder='30 minutes' class="form-control" required/></td>
-            <td><input type="text" name='cookTime' placeholder='2 hours' class="form-control" required/></td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
-        <img src="https://www.papajohns.com/static-assets/a/images/web/product/pizzas/std_1topCheese_m-compressed.jpg" alt="default"
-          class='img-responsive'>
+  <div class "row">
+    <form action='/recipes' method='POST' id='newRecipe'>
+      <div class='col-md-4 title-white'>
+        <h4>Recipe Name: <input type="text" name='recipeName' placeholder='e.g. Cheese Pizza' class="form-control" required/></h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Prep Time</th>
+              <th>Cook Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" name='prepTime' placeholder='30 minutes' class="form-control" required/></td>
+              <td><input type="text" name='cookTime' placeholder='2 hours' class="form-control" required/></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <img src="https://www.papajohns.com/static-assets/a/images/web/product/pizzas/std_1topCheese_m-compressed.jpg" alt="default"
+            class='img-responsive'>
+        </div>
+        <p><a href="#" class="btn btn-primary" role="button">Link photo URL</a>
       </div>
-      <p><a href="#" class="btn btn-primary" role="button">Link photo URL</a>
-    </div>
 
-    <div class="col-md-8 column">
-      <table class="table table-bordered table-hover" id='tableRecipe' style="background-color:#fff;">
-        <input type='text' name='userId' class='hidden' value='{{id}}'>
-        <thead>
-          <tr>
-            <th class="text-center">#</th>
-            <th class="text-center">Measurement</th>
-            <th class="text-center">Ingredients</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id='addr0'>
-            <td>1</td>
-            <td><input type="text" name='measurement' placeholder='e.g. 2 cups' class="form-control" required/></td>
-            <td><input type="text" name='ingredientName' placeholder='e.g. chopped onions' class="form-control" required/></td>
-          </tr>
-          <tr id='addr1'></tr>
-        </tbody>
-      </table>
-      <a id="add_row" class="pull-left btn btn-primary">Add Ingredient</a><a id='delete_row' class="pull-right btn btn-primary">Delete Ingredient</a>
-      <br>
-      <hr>
-      <div id='instructions'>
-        <label class='title-white' for='recipeInstructions'>Instructions:</label>
+      <div class="col-md-8 column">
+        <table class="table table-bordered table-hover" id='tableRecipe' style="background-color:#fff;">
+          <input type='text' name='userId' class='hidden' value='{{id}}'>
+          <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Measurement</th>
+              <th class="text-center">Ingredients</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id='addr0'>
+              <td>1</td>
+              <td><input type="text" name='measurement' placeholder='e.g. 2 cups' class="form-control" required/></td>
+              <td><input type="text" name='ingredientName' placeholder='e.g. chopped onions' class="form-control" required/></td>
+            </tr>
+            <tr id='addr1'></tr>
+          </tbody>
+        </table>
+        <a id="add_row" class="pull-left btn btn-primary">Add Ingredient</a><a id='delete_row' class="pull-right btn btn-primary">Delete Ingredient</a>
+        <br>
         <hr>
-        <button type='button' class="btn btn-sm btn-warning" id='new-step'>Add New Step</button>
-        <textarea name='recipeInstructions' class='form-control' required></textarea>
-      </div>
+        <div id='instructions'>
+          <label class='title-white' for='recipeInstructions'>Instructions:</label>
+          <hr>
+          <button type='button' class="btn btn-sm btn-warning" id='new-step'>Add New Step</button>
+          <textarea name='recipeInstructions' class='form-control' required></textarea>
+        </div>
 
-    </div>
-</div>
-    <hr>
-    <label for='notes'>Notes (Optional):</label>
-    <textarea name='notes' class='form-control'></textarea>
-    <input type='submit' class='btn btn-primary'>
-  </form>
+      </div>
+      <hr>
+      <label for='notes'>Notes (Optional):</label>
+      <textarea name='notes' class='form-control'></textarea>
+      <input type='submit' class='btn btn-primary'>
+    </form>
+  </div>
+
 </div>
 
 <script src="../assets/js/newRecipePage.js"></script>

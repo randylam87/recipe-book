@@ -1,39 +1,150 @@
 {{>navbar/nav}}
 <div class="container">
     <div class="singleRecipe">
-   
-        <div class="imgBox col-sm-6 col-sm-offset-3">
-          <img class="img-responsive recipeImg" src="https://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/d/36/d36ef710-4e7b-5bcb-bc80-04777cb603f5/5834c8cb81b70.image.jpg?resize=1200%2C800" class="img-responsive">
+        <div class="imgBox col-sm-10 col-sm-offset-1">
+            <img class="img-responsive recipeImg" src="https://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/d/36/d36ef710-4e7b-5bcb-bc80-04777cb603f5/5834c8cb81b70.image.jpg?resize=1200%2C800"
+                class="img-responsive">
         </div>
-    
-         
-        <div class="instructionBox col-sm-6 col-sm-offset-3 text-center">
-             <h1 class="text-success recipeName" data-recipeId="{{id}}">{{User.username}}'s {{recipeName}} Recipe</h1> 
-             <h2>Instructions</h2>
-             <h4 class="text-danger">{{recipeInstructions}}</h4>   
+        <div class="instructionBox col-sm-10 col-sm-offset-1 text-center">
+            <h1 class="text-success recipeName" data-recipeId="{{id}}">{{User.username}}'s {{recipeName}} Recipe</h1>
+            {{#if match.match}}
+
+
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit Modal</button>
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Recipe</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class "row">
+                                <form action='/recipes' method='POST' id='newRecipe'>
+                                    <div class='col-md-4 title-white'>
+                                        <h4>Recipe Name: <input type="text" name='recipeName' placeholder='e.g. Cheese Pizza'
+                                                class="form-control" required/></h4>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Prep Time</th>
+                                                    <th>Cook Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name='prepTime' placeholder='30 minutes' class="form-control"
+                                                            required/></td>
+                                                    <td><input type="text" name='cookTime' placeholder='2 hours' class="form-control"
+                                                            required/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div>
+                                            <img src="https://www.papajohns.com/static-assets/a/images/web/product/pizzas/std_1topCheese_m-compressed.jpg" alt="default"
+                                                class='img-responsive'>
+                                        </div>
+                                        <p><a href="#" class="btn btn-primary" role="button">Link photo URL</a>
+                                    </div>
+
+                                    <div class="col-md-8 column">
+                                        <table class="table table-bordered table-hover" id='tableRecipe' style="background-color:#fff;">
+                                            <input type='text' name='userId' class='hidden' value='{{id}}'>
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">#</th>
+                                                    <th class="text-center">Measurement</th>
+                                                    <th class="text-center">Ingredients</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr id='addr0'>
+                                                    <td>1</td>
+                                                    <td><input type="text" name='measurement' placeholder='e.g. 2 cups' class="form-control"
+                                                            required/></td>
+                                                    <td><input type="text" name='ingredientName' placeholder='e.g. chopped onions'
+                                                            class="form-control" required/></td>
+                                                </tr>
+                                                <tr id='addr1'></tr>
+                                            </tbody>
+                                        </table>
+                                        <a id="add_row" class="pull-left btn btn-primary">Add Ingredient</a><a id='delete_row'
+                                            class="pull-right btn btn-primary">Delete Ingredient</a>
+                                        <br>
+                                        <hr>
+                                        <div id='instructions'>
+                                            <label class='title-white' for='recipeInstructions'>Instructions:</label>
+                                            <hr>
+                                            <button type='button' class="btn btn-sm btn-warning" id='new-step'>Add New Step</button>
+                                            <textarea name='recipeInstructions' class='form-control' required></textarea>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                    <label for='notes'>Notes (Optional):</label>
+                                    <textarea name='notes' class='form-control'></textarea>
+                                    <input type='submit' class='btn btn-primary'>
+                                </form>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            {{/if}}
+            <h2 class="text-primary">Instructions</h2>
+            <h4 class="text-danger">{{recipeInstructions}}</h4>
         </div>
-         
-    
-        <div class="ingredientBox col-sm-6 col-sm-offset-3">
-        <h2 class="text-center">Ingredients</h2>
-        <ul class="list-unstyled text-center">
-        {{#each Ingredients}} 
-        <li>{{#each Measurements}} {{measurement}} {{/each}}  {{ingredientName}}</li>
-        <br>
-        {{/each}}   
-        </ul>
+        <div class="ingredientBox col-sm-10 col-sm-offset-1">
+            <h2 class="text-center text-primary">Ingredients</h2>
+            <ul class="list-unstyled text-center">
+                {{#each Ingredients}}
+                <li>{{#each Measurements}} {{measurement}} {{/each}} {{ingredientName}}</li>
+                <br> {{/each}}
+            </ul>
         </div>
-    
-        
-        <div class="nutritionBox col-sm-6 col-sm-offset-3">
-        <div class="col-sm-10 col-sm-offset-1" id="nutritionDiv" data-nutrition="[{{nutrition.1.Fat}}, {{nutrition.3.Carbs}}, {{nutrition.2.Protein}}]">
-            <canvas id='nutrition'></canvas>
-            <p class="text-center">Total Calories: {{nutrition.0.Calories}}</p>
-        
+
+        <div class="nutritionBox col-sm-10 col-sm-offset-1">
+            <div class="col-sm-10 col-sm-offset-1" id="nutritionDiv" data-nutrition="[{{nutrition.1.Fat}}, {{nutrition.3.Carbs}}, {{nutrition.2.Protein}}]">
+                <canvas id='nutrition'></canvas>
+                <p class="text-center">Total Calories: {{nutrition.0.Calories}}</p>
+
+            </div>
         </div>
     </div>
-</div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js'></script>
 <script src='../assets/js/nutrition.js'></script>
 <script src="../assets/js/singleRecipe.js"></script>
+<script src="../assets/js/editRecipePage.js"></script>
