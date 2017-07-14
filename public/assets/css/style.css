@@ -60,7 +60,7 @@ body {
     width: 100%;
 }
 
-.singleRecipe {
+.singleRecipe, .recipe-img   {
     background-color: white;
     border-radius: 15px;
 }
@@ -96,10 +96,11 @@ body {
     border-radius: 0 0 15px 15px;
 }
 
-h1, h2 {
-    color: white;
+.input-space {
+    padding-right: 5px;
 }
 
-#tableRecipe{
-    background-color:#fff;
+.background-transparent-black {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 15px;
 }

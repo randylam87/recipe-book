@@ -1,23 +1,24 @@
-$.get('/', (data) => {
-    let numOfButtons;
-    let numOfRecipes = $('.recipes').length;
-    let paginate = (limit) => {
-        numOfButtons = Math.ceil(numOfRecipes / limit);
-        return numOfButtons;
-    };
-    //defines how many searches will be displayed
-    paginate(10);
+let isLoggedIn = false;
+let numOfRecipes = $('.recipes').length;
+$('#numOfRecipes').html(numOfRecipes);
+if ($('#nav-user').attr('user-id')) {
+    console.log($('#nav-user').attr('user-id'));
+    isLoggedIn = true;
+}
+console.log(isLoggedIn);
 
-    // $('#numOfRecipes').html(numOfRecipes);
-    // let paginationButton;
-    // for(let i =1; i<numOfButtons+1;i++){
-    //     paginationButton = $(`<button class='btn btn-sm btn-primary page-${i} pagination-button'>`);
-    //     paginationButton.text(i);
-    //     $('#pagination').append(paginationButton);
-    // }
+$('.recipes').on('click', function () {
+    let recipeId = $(this).attr('recipe-id');
+    window.location.href = `/recipes/${recipeId}`;
 });
 
-$('.recipes').on('click',function() {
-    let recipeId = $(this).attr('recipe-id');
-    window.location.href=`/recipes/${recipeId}`;
+$('#newRecipe').on('click', function () {
+    if(isLoggedIn){
+        window.location.href = `new`;
+    } else if (!isLoggedIn) {
+        console.log('not logged in')
+        $('#signinModal').modal({
+            show: 'false'
+        });
+    }
 });

@@ -66,8 +66,8 @@ $(document).ready( function() {
     });
 });
 
-$('#new-step').on('click',function() {
-    let newInstruction = $(`<textarea name='recipeInstructions' class='form-control' required></textarea>`)
-    $('#instructions').append(newInstruction);
+// $('#new-step').on('click',function() {
+//     let newInstruction = $(`<textarea name='recipeInstructions' class='form-control' required></textarea>`)
+//     $('#instructions').append(newInstruction);
     
-});
+// });

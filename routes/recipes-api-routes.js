@@ -185,7 +185,8 @@ module.exports = function (app) {
             recipeInstructions: req.body.recipeInstructions,
             prepTime: req.body.prepTime,
             cookTime: req.body.cookTime,
-            notes: req.body.notes
+            notes: req.body.notes,
+            recipeImg: req.body.recipeImg
         }).then((data) => {
             //looping through and creating table row for each ingredient and measurement
             if (Array.isArray(req.body.ingredientName)) {
