@@ -3,9 +3,20 @@
   <h1 class='title-white'>Cookbook</h1>
   <button class='btn btn-sm btn-danger' id='newRecipe'>Post new recipe</button>
   <br>
-  <br>
-  <div class="panel panel-primary">
-    <div class="panel-heading">Total Recipes: <span id='numOfRecipes'></span></div>
+  <br> {{!--
+  <div class="panel panel-primary"> --}} {{!--
+    <div class="panel-heading">Total Recipes: <span id='numOfRecipes'></span></div> --}}
+    <div class='background-transparent-black'>
+      {{#each recipe}}
+      <div class='col-sm-4'>
+        <div class='recipe-img-container text-center'><img class='img-responsive recipe-img' src="{{recipeImg}}">
+          <div class='recipe-name text-center title-white'>{{recipeName}}</div>
+          <div class='author-name title-white'>{{User.username}}</div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{!--
     <table class="table table-condensed table-hover table-bordered text-center">
       <thead class="text-center">
         <th></th>
@@ -18,7 +29,12 @@
       <tbody class='text-center'>
         {{#each recipe}}
         <tr class='recipes' recipe-id='{{id}}'>
-          <td><div class='recipe-img-container'><img class='img-responsive' src="{{recipeImg}}"></div></td>
+          <td>
+            <div class='recipe-img-container text-center'><img class='img-responsive' src="{{recipeImg}}">
+              <div class='recipe-name text-center title-white'>{{recipeName}}</div>
+              <div class='author-name title-white'>{{User.username}}</div>
+            </div>
+          </td>
           <td>{{User.username}}</td>
           <td>{{recipeName}}</td>
           <td>{{prepTime}}</td>
@@ -28,5 +44,5 @@
       </tbody>
   </div>
 </div>
-</table>
+</table> --}}
 <script src='assets/js/home.js'></script>
