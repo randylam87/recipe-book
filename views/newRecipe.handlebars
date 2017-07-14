@@ -1,6 +1,6 @@
 {{>navbar/nav}}
 <div class="container">
-  <div class "row">
+  <div class="row">
     <form action='/recipes' method='POST' id='newRecipe'>
       <div class='col-md-4 title-white'>
         <h4>Recipe Name: <input type="text" name='recipeName' placeholder='e.g. Cheese Pizza' class="form-control" required/></h4>
@@ -19,17 +19,17 @@
           </tbody>
         </table>
         <div>
-          <img src="https://www.papajohns.com/static-assets/a/images/web/product/pizzas/std_1topCheese_m-compressed.jpg" alt="default"
-            class='img-responsive'>
+          <img src="assets/images/recipe-img-stock.jpeg" alt="default" class='img-responsive'>
         </div>
-        <p><a href="#" class="btn btn-primary" role="button">Link photo URL</a>
+        <label class='title-white' for='recipeImg'>Link photo URL</label>
+        <input type='text' name='recipeImg' placeholder='optional' class='form-control'>
       </div>
 
       <div class="col-md-8 column">
-        <table class="table table-bordered table-hover" id='tableRecipe' style="background-color:#fff;">
+        <table class="table table-bordered table-hover" id='tableRecipe'>
           <input type='text' name='userId' class='hidden' value='{{id}}'>
           <thead>
-            <tr>
+            <tr class='title-white'>
               <th class="text-center">#</th>
               <th class="text-center">Measurement</th>
               <th class="text-center">Ingredients</th>
@@ -50,18 +50,15 @@
         <div id='instructions'>
           <label class='title-white' for='recipeInstructions'>Instructions:</label>
           <hr>
-          <button type='button' class="btn btn-sm btn-warning" id='new-step'>Add New Step</button>
           <textarea name='recipeInstructions' class='form-control' required></textarea>
         </div>
 
       </div>
       <hr>
-      <label for='notes'>Notes (Optional):</label>
+      <label for='notes' class='title-white'>Notes (Optional):</label>
       <textarea name='notes' class='form-control'></textarea>
       <input type='submit' class='btn btn-primary'>
     </form>
   </div>
-
 </div>
-
 <script src="../assets/js/newRecipePage.js"></script>
