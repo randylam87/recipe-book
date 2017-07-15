@@ -4,7 +4,7 @@
   {{#if homePage}}<button class='btn btn-sm btn-danger' id='newRecipe'>Post new recipe</button>{{/if}}
   <br>
   <br> {{#if recipe}}
-  <div class='container background-transparent-black'>
+  <div class='container animated fadeIn'>
     {{#each recipe}}
     <div class='col-sm-4'>
       <div class='recipe-img-container text-center' recipe-id='{{id}}' style='background-image: url({{#if recipeImg}}{{recipeImg}}{{else}}{{#if recipeName}}"../assets/images/recipe-img-stock.jpeg"{{/if}})'>
