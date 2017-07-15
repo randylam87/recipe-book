@@ -117,11 +117,15 @@
         </div>
 
         <div class="nutritionBox col-sm-10 col-sm-offset-1">
+            {{#if nutrition}}
             <div class="col-sm-10 col-sm-offset-1" id="nutritionDiv" data-nutrition="[{{nutrition.1.Fat}}, {{nutrition.3.Carbs}}, {{nutrition.2.Protein}}]">
                 <canvas id='nutrition'></canvas>
                 <p class="text-center">Total Calories: {{nutrition.0.Calories}}</p>
-
             </div>
+            {{else}}
+            <h1 class="text-center">Nutrition Data Error - Please Check Ingredients</h1>
+            {{/if}}
+
         </div>
     </div>
 </div>
