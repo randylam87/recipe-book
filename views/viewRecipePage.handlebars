@@ -26,16 +26,7 @@
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="editRecipeButton">Edit Recipe</button>
         </div>
     </div>
-
-    <div class="row">
-        <div class="instructionBox col-sm-10 col-sm-offset-1 text-center">
-            {{/if}}
-            <h2 class="text-primary">Instructions</h2>
-            <h4 class="text-danger">{{breaklines recipeInstructions}}</h4>
-        </div>
-    </div>
-
-    {{!--ingredients section --}}
+    {{/if}} {{!--ingredients section --}}
     <div class="row">
         <div class="ingredientBox col-sm-10 col-sm-offset-1">
             <h2 class="text-center text-primary">Ingredients</h2>
@@ -44,6 +35,20 @@
                 <li>{{#each Measurements}} {{measurement}} {{/each}} {{ingredientName}}</li>
                 <br> {{/each}}
             </ul>
+        </div>
+    </div>
+
+    {{!-- instructions and notes --}}
+    <div class="row">
+        <div class="instructionBox col-sm-10 col-sm-offset-1 text-center">
+            <h2 class="text-primary">Instructions</h2>
+            <h4 class="text-danger">{{breaklines recipeInstructions}}</h4>
+        </div>
+    </div>
+    <div class='row'>
+        <div class="notesBox col-sm-10 col-sm-offset-1 text-center">
+            <h2 class="text-primary">Notes</h2>
+            <h4 class="text-danger">{{breaklines notes}}</h4>
         </div>
     </div>
 
@@ -64,6 +69,8 @@
             {{/if}}
         </div>
     </div>
+
+
 </div>
 
 <!-- Modal -->
@@ -148,9 +155,9 @@
                 <hr>
             </div>
             <div class="modal-footer">
-                 <form action='/recipes/{{id}}?_method=DELETE' method='POST' id='newRecipe'>
+                <form action='/recipes/{{id}}?_method=DELETE' method='POST' id='newRecipe'>
                     <button class="pull-left"> <i style="color:red" class="text-warning fa fa-trash fa-2x" aria-hidden="true"> Delete Recipe</i> </button>
-                    </form>
+                </form>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
