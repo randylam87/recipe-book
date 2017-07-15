@@ -11,7 +11,7 @@
             {{#if match.match}}
 
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit Modal</button>
+            <button type="button" class="btn btn-info btn-lg editBtn" data-toggle="modal" data-target="#myModal">Edit Modal</button>
 
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">
@@ -26,7 +26,7 @@
                         <div class="modal-body">
 
                             <div class="row">
-                                <form action='/recipes' method='POST' id='newRecipe'>
+                                <form action='/recipes/{{id}}?_method=PUT' method='POST' id='newRecipe'>
                                     <div class='col-md-4 title-white'>
                                         <h4>Recipe Name: <input type="text" name='recipeName' placeholder='e.g. Cheese Pizza'
                                                 value="{{recipeName}}" class="form-control" required/></h4>
@@ -57,7 +57,7 @@
 
                                     <div class="col-md-8 column">
                                         <table class="table" id='tableRecipe'>
-                                            <input type='text' name='userId' class='hidden' value='{{id}}'>
+                                            <input type='text' name='userId' class='hidden' value='{{UserId}}'>
                                             <thead>
                                                 <tr class='title-white'>
                                                     <th class="text-center">#</th>

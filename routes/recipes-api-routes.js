@@ -16,38 +16,12 @@ module.exports = function (app) {
                 model: db.Users,
                 attributes: ["id", "username"]
             }]
-        }, {
-            limit: 10
         }).then(function (queryResult) {
             let hbsObject = {
                 recipe: queryResult,
             };
             addUserToHbsObj(req, hbsObject);
             res.render('home', hbsObject);
-        });
-    });
-
-    //Main Page Pagination - Takes all recipes and displays 10 results based on page number
-    app.get("/all/page/:number", function (req, res) {
-        let pageNumber = req.params.number;
-        let pageOffset = (pageNumber * 10) + 1;
-        let userInfo = req.user;
-        db.Recipes.findAll({
-            include: [{
-                model: db.Ingredients,
-                include: [
-                    db.Measurements
-                ]
-            }, {
-                model: db.Users,
-                attributes: ["id", "username"]
-            }]
-        }, {
-            offset: pageOffset,
-            limit: 10
-        }).then(function (recipesDB) {
-            recipesDB.push(req.user);
-            res.render('home', recipesDB);
         });
     });
 
@@ -124,48 +98,7 @@ module.exports = function (app) {
 
     //Save a new recipe
     app.post("/recipes", isLoggedIn, function (req, res) {
-
-        if (req.body.recipeImg) {
-            db.Recipes.create({
-                UserId: req.body.userId,
-                recipeName: req.body.recipeName,
-                recipeInstructions: req.body.recipeInstructions,
-                prepTime: req.body.prepTime,
-                cookTime: req.body.cookTime,
-                notes: req.body.notes,
-                recipeImg: req.body.recipeImg
-            }).then((data) => {
-                //looping through and creating table row for each ingredient and measurement
-                if (Array.isArray(req.body.ingredientName)) {
-                    for (i = 0; i < req.body.ingredientName.length; i++) {
-                        updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
-                    }
-                } else {
-                    updateIngredients(data, req.body.ingredientName, req.body.measurement, req, res);
-                }
-                res.redirect('/new');
-            });
-        } else {
-            db.Recipes.create({
-                UserId: req.body.userId,
-                recipeName: req.body.recipeName,
-                recipeInstructions: req.body.recipeInstructions,
-                prepTime: req.body.prepTime,
-                cookTime: req.body.cookTime,
-                notes: req.body.notes
-            }).then((data) => {
-                //looping through and creating table row for each ingredient and measurement
-                if (Array.isArray(req.body.ingredientName)) {
-                    for (i = 0; i < req.body.ingredientName.length; i++) {
-                        updateIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
-                    }
-                } else {
-                    updateIngredients(data, req.body.ingredientName, req.body.measurement, req, res);
-                }
-                res.redirect('/new');
-            });
-        }
-
+        createRecipe(req, res);
     });
 
     //Delete one single recipe
@@ -179,15 +112,14 @@ module.exports = function (app) {
         });
     });
 
-    //Update one single recipe
-    app.put("/recipes", isLoggedIn, function (req, res) {
-        db.Recipes.update(
-            req.body, {
-                where: {
-                    id: req.body.id
-                }
-            }).then(function (recipesDB) {
-            res.json(recipesDB);
+    // Update one single recipe
+    app.put("/recipes/:id", isLoggedIn, function (req, res) {
+        db.Recipes.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(function (recipesDB) {
+            createRecipe(req, res);
         });
     });
 
@@ -236,7 +168,7 @@ let findAllIngredients = (recipesDB, res, req) => {
 };
 
 // Adds Ingredients to Database
-let updateIngredients = (data, ingredient, measurement, req, res) => {
+let createIngredients = (data, ingredient, measurement, req, res) => {
     db.Ingredients.create({
         RecipeId: data.dataValues.id,
         ingredientName: ingredient
@@ -265,3 +197,46 @@ function isLoggedIn(req, res, next) {
         return next();
     res.redirect('/');
 }
+
+let createRecipe = (req, res) => {
+    if (req.body.recipeImg) {
+        db.Recipes.create({
+            UserId: req.body.userId,
+            recipeName: req.body.recipeName,
+            recipeInstructions: req.body.recipeInstructions,
+            prepTime: req.body.prepTime,
+            cookTime: req.body.cookTime,
+            notes: req.body.notes,
+            recipeImg: req.body.recipeImg
+        }).then((data) => {
+            //looping through and creating table row for each ingredient and measurement
+            if (Array.isArray(req.body.ingredientName)) {
+                for (i = 0; i < req.body.ingredientName.length; i++) {
+                    createIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
+                }
+            } else {
+                createIngredients(data, req.body.ingredientName, req.body.measurement, req, res);
+            }
+            res.redirect('/');
+        });
+    } else {
+        db.Recipes.create({
+            UserId: req.body.userId,
+            recipeName: req.body.recipeName,
+            recipeInstructions: req.body.recipeInstructions,
+            prepTime: req.body.prepTime,
+            cookTime: req.body.cookTime,
+            notes: req.body.notes
+        }).then((data) => {
+            //looping through and creating table row for each ingredient and measurement
+            if (Array.isArray(req.body.ingredientName)) {
+                for (i = 0; i < req.body.ingredientName.length; i++) {
+                    createIngredients(data, req.body.ingredientName[i], req.body.measurement[i], req, res);
+                }
+            } else {
+                createIngredients(data, req.body.ingredientName, req.body.measurement, req, res);
+            }
+            res.redirect('/');
+        });
+    }
+};
