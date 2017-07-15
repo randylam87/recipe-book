@@ -1,112 +1,42 @@
 {{>navbar/nav}}
 <div class="container">
-    <div class="singleRecipe">
-        <div class="imgBox col-sm-10 col-sm-offset-1">
-            {{#if recipeImg}}
-            <img src="{{recipeImg}}" alt="default" class='img-responsive recipeImg center-block'> {{else}}
-            <img src="../assets/images/recipe-img-stock.jpeg" alt="default" class='img-responsive recipeImg'> {{/if}}
+    {{!--image box  --}}
+    <div class="row">
+        <div class="singleRecipe">
+            <div class="imgBox col-sm-10 col-sm-offset-1">
+                {{#if recipeImg}}
+                <img src="{{recipeImg}}" alt="default" class='img-responsive recipeImg center-block thumbnail imageStyle'> {{else}}
+                <img src="../assets/images/recipe-img-stock.jpeg" alt="default" class='img-responsive recipeImg'> {{/if}}
+            </div>
         </div>
-        <div class="instructionBox col-sm-10 col-sm-offset-1 text-center">
+    </div>
+
+    {{!--instructions sectiona and edit button  --}}
+    <div class="row">
+        <div class="titleBox col-sm-10 col-sm-offset-1 text-center">
             <h1 class="text-success recipeName" data-recipeId="{{id}}">{{recipeName}} Recipe by {{User.username}}</h1>
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="titleBox col-sm-10 col-sm-offset-1 text-center">
             {{#if match.match}}
 
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info btn-lg editBtn" data-toggle="modal" data-target="#myModal">Edit Modal</button>
-
-            <!-- Modal -->
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog modal-lg">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Edit Recipe</h4>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="row">
-                                <form action='/recipes/{{id}}?_method=PUT' method='POST' id='newRecipe'>
-                                    <div class='col-md-4 title-white'>
-                                        <h4>Recipe Name: <input type="text" name='recipeName' placeholder='e.g. Cheese Pizza'
-                                                value="{{recipeName}}" class="form-control" required/></h4>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Prep Time</th>
-                                                    <th>Cook Time</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="text" name='prepTime' placeholder='30 minutes' value="{{prepTime}}"
-                                                            class="form-control input-space" required/></td>
-                                                    <td><input type="text" name='cookTime' placeholder='2 hours' value="{{cookTime}}"
-                                                            class="form-control" required/></td>
-                                                </tr>
-                                            </tbody>
-                                        </table><br>
-                                        <div>
-                                            {{#if recipeImg}}
-                                            <img src="{{recipeImg}}" alt="default" class='img-responsive recipe-img'> {{else}}
-                                            <img src="../assets/images/recipe-img-stock.jpeg" alt="default" class='img-responsive recipe-img'>                                            {{/if}}
-                                        </div><br>
-                                        <label class='title-white' for='recipeImg'>Link photo URL</label>
-                                        <input type='text' id='recipe-url' name='recipeImg' value="{{recipeImg}}" placeholder='optional' class='form-control'>
-                                    </div>
-
-                                    <div class="col-md-8 column">
-                                        <table class="table" id='tableRecipe'>
-                                            <input type='text' name='userId' class='hidden' value='{{UserId}}'>
-                                            <thead>
-                                                <tr class='title-white'>
-                                                    <th class="text-center">#</th>
-                                                    <th class="text-center">Measurement</th>
-                                                    <th class="text-center">Ingredients</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class='title-white ingredientsTable'>
-                                                {{#each Ingredients}}
-                                                <tr class='ingredientRow'>
-                                                    <td>{{inc @index}}</td>
-                                                    <td><input type="text" name='measurement' placeholder='e.g. 2 cups' {{#each
-                                                            Measurements}}value="{{measurement}}" {{/each}} class="form-control"
-                                                            required/></td>
-                                                    <td><input type="text" name='ingredientName' placeholder='e.g. chopped onions'
-                                                            value="{{ingredientName}}" class="form-control" required/></td>
-                                                </tr>
-                                                {{/each}}
-                                            </tbody>
-                                        </table>
-                                        <hr>
-                                        <a id="add_row" class="pull-left btn btn-success">Add Ingredient</a><a id='delete_row'
-                                            class="pull-right btn btn-danger">Delete Ingredient</a>
-                                        <br>
-                                        <hr>
-                                        <div id='instructions'>
-                                            <label class='title-white' for='recipeInstructions'>Instructions:</label>
-                                            <textarea name='recipeInstructions' class='form-control' required>{{recipeInstructions}}</textarea>
-                                        </div>
-                                        <hr>
-                                        <label for='notes' class='title-white'>Notes (Optional):</label>
-                                        <textarea name='notes' class='form-control'>{{notes}}</textarea><br>
-                                        <input type='submit' class='btn btn-primary'>
-                                    </div>
-                                </form>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="editRecipeButton">Edit Recipe</button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="instructionBox col-sm-10 col-sm-offset-1 text-center">
             {{/if}}
             <h2 class="text-primary">Instructions</h2>
-            <h4 class="text-danger">{{breaklines recipeInstructions}}</h4>
+            <h4 class="text-danger">{{recipeInstructions}}</h4>
         </div>
+    </div>
+
+    {{!--ingredients section  --}}
+    <div class="row">
         <div class="ingredientBox col-sm-10 col-sm-offset-1">
             <h2 class="text-center text-primary">Ingredients</h2>
             <ul class="list-unstyled text-center">
@@ -115,18 +45,108 @@
                 <br> {{/each}}
             </ul>
         </div>
+    </div>
 
+    {{!--nutrition section  --}}
+    <div class="row">
         <div class="nutritionBox col-sm-10 col-sm-offset-1">
-            {{#if nutrition}}
+            <h2 class="text-center text-primary">Nutrition</h2>
+            <p class="text-center"><strong>Total Calories: </strong>{{nutrition.0.Calories}}</p>
             <div class="col-sm-10 col-sm-offset-1" id="nutritionDiv" data-nutrition="[{{nutrition.1.Fat}}, {{nutrition.3.Carbs}}, {{nutrition.2.Protein}}]">
                 <canvas id='nutrition'></canvas>
-                <p class="text-center">Total Calories: {{nutrition.0.Calories}}</p>
             </div>
-            {{else}}
-            <h1 class="text-center">Nutrition Data Error - Please Check Ingredients</h1>
-            {{/if}}
-
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Recipe</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <form action='/recipes/{{id}}?_method=PUT' method='POST' id='newRecipe'>
+                        <div class='col-md-4 title-white'>
+                            <h4>Recipe Name: <input type="text" name='recipeName' placeholder='e.g. Cheese Pizza'
+                                    value="{{recipeName}}" class="form-control" required/></h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Prep Time</th>
+                                        <th>Cook Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" name='prepTime' placeholder='30 minutes' value="{{prepTime}}"
+                                                class="form-control input-space" required/></td>
+                                        <td><input type="text" name='cookTime' placeholder='2 hours' value="{{cookTime}}"
+                                                class="form-control" required/></td>
+                                    </tr>
+                                </tbody>
+                            </table><br>
+                            <div>
+                                {{#if recipeImg}}
+                                <img src="{{recipeImg}}" alt="default" class='img-responsive recipe-img'> {{else}}
+                                <img src="../assets/images/recipe-img-stock.jpeg" alt="default" class='img-responsive recipe-img'>                                            {{/if}}
+                            </div><br>
+                            <label class='title-white' for='recipeImg'>Link photo URL</label>
+                            <input type='text' id='recipe-url' name='recipeImg' value="{{recipeImg}}" placeholder='optional' class='form-control'>
+                        </div>
+
+                        <div class="col-md-8 column">
+                            <table class="table" id='tableRecipe'>
+                                <input type='text' name='userId' class='hidden' value='{{UserId}}'>
+                                <thead>
+                                    <tr class='title-white'>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">Measurement</th>
+                                        <th class="text-center">Ingredients</th>
+                                    </tr>
+                                </thead>
+                                <tbody class='title-white ingredientsTable'>
+                                    {{#each Ingredients}}
+                                    <tr class='ingredientRow'>
+                                        <td>{{inc @index}}</td>
+                                        <td><input type="text" name='measurement' placeholder='e.g. 2 cups' {{#each
+                                                Measurements}}value="{{measurement}}" {{/each}} class="form-control"
+                                                required/></td>
+                                        <td><input type="text" name='ingredientName' placeholder='e.g. chopped onions'
+                                                value="{{ingredientName}}" class="form-control" required/></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            <hr>
+                            <a id="add_row" class="pull-left btn btn-success">Add Ingredient</a><a id='delete_row'
+                                class="pull-right btn btn-danger">Delete Ingredient</a>
+                            <br>
+                            <hr>
+                            <div id='instructions'>
+                                <label class='title-white' for='recipeInstructions'>Instructions:</label>
+                                <textarea name='recipeInstructions' class='form-control' required>{{recipeInstructions}}</textarea>
+                            </div>
+                            <hr>
+                            <label for='notes' class='title-white'>Notes (Optional):</label>
+                            <textarea name='notes' class='form-control'>{{notes}}</textarea><br>
+                            <input type='submit' class='btn btn-primary'>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js'></script>
