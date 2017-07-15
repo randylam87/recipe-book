@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     //many:many with Measurements
     Ingredients.hasMany(models.Measurements, {
-      foreignKey: "IngredientId"
+      foreignKey: "IngredientId",
+      onDelete: 'cascade'
     });
   };
   return Ingredients;
