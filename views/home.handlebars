@@ -1,14 +1,13 @@
 {{>navbar/nav}}
 <div class="container">
   <h1 class='title-white'>Cookbook</h1>
-  <button class='btn btn-sm btn-danger' id='newRecipe'>Post new recipe</button>
+  {{#unless search}}<button class='btn btn-sm btn-danger' id='newRecipe'>Post new recipe</button>{{else}}<div class='title-white'>No Results Found<div>{{/unless}}
   <br>
   <br>
     <div class='container background-transparent-black'>
       {{#each recipe}}
       <div class='col-sm-4'>
-        <div class='recipe-img-container text-center' recipe-id='{{id}}' style='background-image: url({{recipeImg}})'>
-          {{!-- <img class='img-responsive recipe-img-home' src="{{recipeImg}}"> --}}
+        <div class='recipe-img-container text-center' recipe-id='{{id}}' style='background-image: url({{#if recipeImg}}{{recipeImg}}{{else}}"../assets/images/recipe-img-stock.jpeg"{{/if}})'>
           {{#if recipeName}}<div class='recipe-name text-center title-white'>{{recipeName}}</div> {{/if}}
           {{#if User.username}} <div class='author-name title-white'>By: {{User.username}}</div> {{/if}}
         </div>
