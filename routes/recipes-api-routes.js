@@ -53,7 +53,7 @@ module.exports = function (app) {
                     recipe: matchArray,
                     search: true
                 };
-                
+
                 addUserToHbsObj(req, hbsObject);
                 res.render('home', hbsObject);
             });
@@ -141,17 +141,38 @@ let updateNutrition = (ingredients, res, recipesDB, req) => {
         nutritionArray.push({
             Calories: JSON.parse(body).calories
         });
-        nutritionArray.push({
-            Fat: JSON.parse(body).totalNutrients.FAT.quantity
-        });
-        nutritionArray.push({
-            Protein: JSON.parse(body).totalNutrients.PROCNT.quantity
-        });
-        nutritionArray.push({
-            Carbs: JSON.parse(body).totalNutrients.CHOCDF.quantity
-        });
-
+        if ("FAT" in JSON.parse(body).totalNutrients) {
+            nutritionArray.push({
+                Fat: JSON.parse(body).totalNutrients.FAT.quantity
+            });
+        } else {
+            nutritionArray.push({
+                Fat: 0
+            });
+        }
+        if ("PROCNT" in JSON.parse(body).totalNutrients) {
+            nutritionArray.push({
+                Protein: JSON.parse(body).totalNutrients.PROCNT.quantity
+            });
+        } else {
+            nutritionArray.push({
+                Protein: 0
+            });
+        }
+        if ("CHOCDF" in JSON.parse(body).totalNutrients) {
+            nutritionArray.push({
+                Carbs: JSON.parse(body).totalNutrients.CHOCDF.quantity
+            });
+        } else {
+            nutritionArray.push({
+                Carbs: 0
+            });
+        }
         recipesDB = recipesDB.toJSON();
+        //Checks to see if there are no nutrients
+        if (nutritionArray[0].Calories + nutritionArray[1].Fat + nutritionArray[2].Protein + nutritionArray[3].Carbs === 0) {
+            nutritionArray = false;
+        }
         recipesDB.nutrition = nutritionArray;
         //IF LOGGED IN & USER IS ALSO THE AUTHOR
         if (req.user && req.user.id == recipesDB.User.id) {
