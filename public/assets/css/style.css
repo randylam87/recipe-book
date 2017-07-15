@@ -106,25 +106,29 @@ body {
 }
 
 .recipe-img-container {
-    width: 200px;
-    height: 150px;
-    margin: 0 auto;
+    background-size: cover;
+    height: 250px;
+    /* margin: 0 auto; */
     position: relative;
-    background-size: cover; 
 }
 
-.recipe-img {
+.recipe-img, .recipe-img-container {
     border-radius: 15px;
-    background-size: cover; 
 }
-.recipe-name {
-    top: 0;
+
+.recipe-img-home {
+    height: 100%;
+    width: auto;
+}
+
+.recipe-name, .author-name {
     position: absolute;
     width: 100%;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .author-name {
     bottom: 0;
-    position: absolute;
-    width: 100%;
 }

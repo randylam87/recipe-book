@@ -3,46 +3,17 @@
   <h1 class='title-white'>Cookbook</h1>
   <button class='btn btn-sm btn-danger' id='newRecipe'>Post new recipe</button>
   <br>
-  <br> {{!--
-  <div class="panel panel-primary"> --}} {{!--
-    <div class="panel-heading">Total Recipes: <span id='numOfRecipes'></span></div> --}}
-    <div class='background-transparent-black'>
+  <br>
+    <div class='container background-transparent-black'>
       {{#each recipe}}
       <div class='col-sm-4'>
-        <div class='recipe-img-container text-center' recipe-id='{{id}}'><img class='img-responsive recipe-img' src="{{recipeImg}}">
-          <div class='recipe-name text-center title-white'>{{recipeName}}</div>
-          <div class='author-name title-white'>{{User.username}}</div>
+        <div class='recipe-img-container text-center' recipe-id='{{id}}' style='background-image: url({{recipeImg}})'>
+          {{!-- <img class='img-responsive recipe-img-home' src="{{recipeImg}}"> --}}
+          {{#if recipeName}}<div class='recipe-name text-center title-white'>{{recipeName}}</div> {{/if}}
+          {{#if User.username}} <div class='author-name title-white'>By: {{User.username}}</div> {{/if}}
         </div>
       </div>
       {{/each}}
     </div>
-    {{!--
-    <table class="table table-condensed table-hover table-bordered text-center">
-      <thead class="text-center">
-        <th></th>
-        <th>Author</th>
-        <th>Recipe Name</th>
-        <th>Prep Time</th>
-        <th>Cook Time</th>
-        </tr>
-      </thead>
-      <tbody class='text-center'>
-        {{#each recipe}}
-        <tr class='recipes' recipe-id='{{id}}'>
-          <td>
-            <div class='recipe-img-container text-center'><img class='img-responsive' src="{{recipeImg}}">
-              <div class='recipe-name text-center title-white'>{{recipeName}}</div>
-              <div class='author-name title-white'>{{User.username}}</div>
-            </div>
-          </td>
-          <td>{{User.username}}</td>
-          <td>{{recipeName}}</td>
-          <td>{{prepTime}}</td>
-          <td>{{cookTime}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-  </div>
-</div>
-</table> --}}
+
 <script src='assets/js/home.js'></script>
