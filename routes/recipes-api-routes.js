@@ -91,6 +91,7 @@ module.exports = function (app) {
             }]
         }).then(function (recipesDB) {
             findAllIngredients(recipesDB, res, req);
+            console.log(recipesDB);
         });
     });
 

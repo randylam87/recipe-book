@@ -52,6 +52,12 @@ Handlebars.registerHelper("inc", function(value, options)
     return parseInt(value) + 1;
 });
 
+Handlebars.registerHelper('breaklines', function(text) {
+    text = Handlebars.Utils.escapeExpression(text);
+    text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+    return new Handlebars.SafeString(text);
+});
+
 //Routes
 var authRoute = require('./routes/auth.js')(app, passport);
 require("./routes/recipes-api-routes.js")(app);
