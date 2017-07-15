@@ -151,6 +151,14 @@ body {
     margin-top: 10px;
 }
 
-.recipe-name, .author-name{
-        background: rgba(126, 216, 249,0.3) ;
+.recipe-name{
+    background: rgba(126, 216, 249,0.3) ;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.author-name{
+    background: rgba(126, 216, 249,0.3) ;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }

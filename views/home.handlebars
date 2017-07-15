@@ -9,8 +9,8 @@
     {{#each recipe}}
     <div class='col-sm-4'>
       <div class='recipe-img-container text-center' recipe-id='{{id}}' {{#if recipeImg}}style="background-image: url('{{recipeImg}}')"{{else}}style="background-image: url('../assets/images/recipe-img-stock.jpeg')"{{/if}}>
-        <div class='recipe-name text-center title-white'>{{recipeName}}</div> 
-        <div class='author-name title-white'>By: {{User.username}}</div>
+        <div class='recipe-name text-center title-white rounded'>{{recipeName}}</div> 
+        <div class='author-name title-white rounded'>By: {{User.username}}</div>
       </div>
     </div>
     {{/each}}
