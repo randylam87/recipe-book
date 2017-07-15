@@ -89,6 +89,7 @@ body {
 .ingredientBox {
     background-color: white;
     font-size: 20px;
+    border: 1px solid #e3e3e3;
 }
 
 .nutritionBox {
@@ -131,4 +132,19 @@ body {
 
 .author-name {
     bottom: 0;
+}
+
+.titleBox {
+    background-color: white;
+}
+
+.instructionBox {
+    background-color: white;
+    border-top: 1px solid #e3e3e3;
+}
+
+.imageStyle{
+    width: 70%;
+    height: 90%;
+    margin-top: 10px;
 }
