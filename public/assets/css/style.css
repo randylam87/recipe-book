@@ -111,6 +111,7 @@ body {
     height: 250px;
     /* margin: 0 auto; */
     position: relative;
+    margin-top: 15px;
 }
 
 .recipe-img, .recipe-img-container {
