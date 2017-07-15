@@ -150,3 +150,7 @@ body {
     height: 90%;
     margin-top: 10px;
 }
+
+.recipe-name, .author-name{
+        background: rgba(126, 216, 249,0.3) ;
+}
