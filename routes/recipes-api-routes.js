@@ -96,7 +96,6 @@ module.exports = function (app) {
             }]
         }).then(function (recipesDB) {
             findAllIngredients(recipesDB, res, req);
-            console.log(recipesDB);
         });
     });
 
@@ -141,49 +140,46 @@ module.exports = function (app) {
 let updateNutrition = (ingredients, res, recipesDB, req) => {
     let apiKey = "6ebac7e6562262d5b1213134d8d7fe4a";
     let appID = "936c8444";
-    let nutritionArray = [];
+    let nutritionArray = []; //MACRO NUTRIENTS
+    let nutritionArray2 = []; //ALL NUTRIENTS
     request(`https://api.edamam.com/api/nutrition-data?app_id=${appID}&app_key=${apiKey}&ingr=${ingredients}`, function (error, response, body) {
-        //Nutrition Array Order = Calories, Fat, Protein, Carbs
+        //MACRO NUTRITION
         nutritionArray.push({
             Calories: JSON.parse(body).calories
         });
-        if ("FAT" in JSON.parse(body).totalNutrients) {
-            nutritionArray.push({
-                Fat: JSON.parse(body).totalNutrients.FAT.quantity
-            });
-        } else {
-            nutritionArray.push({
-                Fat: 0
-            });
-        }
-        if ("PROCNT" in JSON.parse(body).totalNutrients) {
-            nutritionArray.push({
-                Protein: JSON.parse(body).totalNutrients.PROCNT.quantity
-            });
-        } else {
-            nutritionArray.push({
-                Protein: 0
-            });
-        }
-        if ("CHOCDF" in JSON.parse(body).totalNutrients) {
-            nutritionArray.push({
-                Carbs: JSON.parse(body).totalNutrients.CHOCDF.quantity
-            });
-        } else {
-            nutritionArray.push({
-                Carbs: 0
-            });
-        }
+        keyExist(body, nutritionArray, "FAT", "Fat");
+        keyExist(body, nutritionArray, "PROCNT", "Protein");
+        keyExist(body, nutritionArray, "CHOCDF", "Carbs");
+        //VITAMIN AND MINERALS
+        keyExist(body, nutritionArray2, "CA", "Calcium");
+        keyExist(body, nutritionArray2, "MG", "Magnesium");
+        keyExist(body, nutritionArray2, "K", "Potassium");
+        keyExist(body, nutritionArray2, "FE", "Iron");
+        keyExist(body, nutritionArray2, "ZN", "Zinc");
+        keyExist(body, nutritionArray2, "P", "Phosphorus");
+        keyExist(body, nutritionArray2, "VITC", "VitaminC");
+        keyExist(body, nutritionArray2, "RIBF", "Riboflavin");
+        keyExist(body, nutritionArray2, "VITB6A", "VitaminB6");
+        keyExist(body, nutritionArray2, "VITB12", "VitaminB12");
+
         recipesDB = recipesDB.toJSON();
         //Checks to see if there are no nutrients
         if (nutritionArray[0].Calories + nutritionArray[1].Fat + nutritionArray[2].Protein + nutritionArray[3].Carbs === 0) {
             nutritionArray = false;
+            nutritionArray2 = false;
         }
         recipesDB.nutrition = nutritionArray;
+        recipesDB.nutrition2 = nutritionArray2;
         //IF LOGGED IN & USER IS ALSO THE AUTHOR
         if (req.user && req.user.id == recipesDB.User.id) {
             recipesDB.match = {
                 match: true
+            };
+        }
+        if (req.user) {
+            recipesDB.currentUser = {
+                currentUserId: req.user.id,
+                currentUsername: req.user.username
             };
         }
         res.render("viewRecipePage", recipesDB);
@@ -269,5 +265,60 @@ let createRecipe = (req, res) => {
             }
             res.redirect('/');
         });
+    }
+};
+
+
+let verifyNutrition = (body, nutritionArray, nutrientName, dataNutrient) => {
+    tempObj = {};
+    tempObj[nutrientName] = dataNutrient;
+    nutritionArray.push(tempObj);
+};
+
+let keyExist = (body, nutritionArray, nameStr, nutrientName) => {
+    if (nameStr in JSON.parse(body).totalNutrients) {
+        if (nutrientName == "Fat") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.FAT.quantity);
+        }
+        if (nutrientName == "Protein") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.PROCNT.quantity);
+        }
+        if (nutrientName == "Carbs") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.CHOCDF.quantity);
+        }
+        if (nutrientName == "Calcium") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.CA.quantity);
+        }
+        if (nutrientName == "Magnesium") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.MG.quantity);
+        }
+        if (nutrientName == "Potassium") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.K.quantity);
+        }
+        if (nutrientName == "Iron") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.FE.quantity);
+        }
+        if (nutrientName == "Zinc") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.ZN.quantity);
+        }
+        if (nutrientName == "Phosphorus") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.P.quantity);
+        }
+        if (nutrientName == "VitaminC") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.VITC.quantity);
+        }
+        if (nutrientName == "Riboflavin") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.RIBF.quantity);
+        }
+        if (nutrientName == "VitaminB6") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.VITB6A.quantity);
+        }
+        if (nutrientName == "VitaminB12") {
+            verifyNutrition(body, nutritionArray, nutrientName, JSON.parse(body).totalNutrients.VITB12.quantity);
+        }
+    } else {
+        tempObj = {};
+        tempObj[nutrientName] = 0;
+        nutritionArray.push(tempObj);
     }
 };
