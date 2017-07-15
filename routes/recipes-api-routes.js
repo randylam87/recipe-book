@@ -117,7 +117,7 @@ module.exports = function (app) {
                 id: req.params.id
             }
         }).then(function (recipesDB) {
-            res.json(recipesDB);
+            res.redirect('/');
         });
     });
 
