@@ -40,15 +40,17 @@ module.exports = function (app) {
                 }]
             })
             .then(function (result) {
+                let matchArray = [];
                 result.forEach((data, index) => {
-                    if (data.recipeName.toLowerCase().indexOf(req.query.search.toLowerCase()) == -1) {
-                        result.splice(index, 1);
+
+                    if (data.recipeName.toLowerCase().split(" ").indexOf(req.query.search.toLowerCase()) > -1) {
+                        matchArray.push(data);
                     }
                 });
-                result.push(req.user);
+                matchArray.push(req.user);
                 // res.json(result);
                 let hbsObject = {
-                    recipe: result,
+                    recipe: matchArray,
                 };
                 addUserToHbsObj(req, hbsObject);
                 res.render('home', hbsObject);
