@@ -8,7 +8,6 @@
       {{#each recipe}}
       <div class='col-sm-4'>
         <div class='recipe-img-container text-center' recipe-id='{{id}}' style='background-image: url({{#if recipeImg}}{{recipeImg}}{{else}}"../assets/images/recipe-img-stock.jpeg"{{/if}})'>
-          {{!-- <img class='img-responsive recipe-img-home' src="{{recipeImg}}"> --}}
           {{#if recipeName}}<div class='recipe-name text-center title-white'>{{recipeName}}</div> {{/if}}
           {{#if User.username}} <div class='author-name title-white'>By: {{User.username}}</div> {{/if}}
         </div>
