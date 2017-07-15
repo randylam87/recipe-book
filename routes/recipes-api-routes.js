@@ -23,8 +23,6 @@ module.exports = function (app) {
                 recipe: queryResult,
             };
             addUserToHbsObj(req, hbsObject);
-            // res.json(hbsObject);
-            // console.log(hbsObject)
             res.render('home', hbsObject);
         });
     });
@@ -48,8 +46,6 @@ module.exports = function (app) {
                 query: queryResult,
             };
             addUserToHbsObj(req, hbsObject);
-            // res.json(hbsObject);
-            // console.log(hbsObject)
             res.json(hbsObject);
         });
     });
@@ -116,36 +112,6 @@ module.exports = function (app) {
             res.render("editRecipePage", userInfo);
         });
     });
-
-    //View All Recipes
-    // app.get('/all', (req, res) => {
-    //     db.Recipes.findAll({
-    //         include: [{
-    //             model: db.Ingredients,
-    //             include: [
-    //                 db.Measurements
-    //             ]
-    //         }]
-    //     }).then((data) => {
-    //         let recipesArr = [];
-    //         data.forEach((recipes) => {
-    //             recipesArr.push(recipes.dataValues);
-    //         });
-    //         let allRecipes = {
-    //             recipes: recipesArr
-    //         };
-    //         // console.log(allRecipes);
-    //         res.render("viewRecipePage", allRecipes);
-    //     });
-    // });
-    ///////////////////////END TESTING
-
-    //Root
-    // app.get('/', function (req, res) {
-    //     // console.log(req);
-    //     let userInfo = req.user;
-    //     res.render('home', userInfo);
-    // });
 
     //Find one single recipe - include users
     app.get("/recipes/:id", function (req, res) {
