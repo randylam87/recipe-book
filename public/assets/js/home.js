@@ -7,7 +7,7 @@ if ($('#nav-user').attr('user-id')) {
 }
 console.log(isLoggedIn);
 
-$('.recipes').on('click', function () {
+$('.recipe-img-container').on('click', function () {
     let recipeId = $(this).attr('recipe-id');
     window.location.href = `/recipes/${recipeId}`;
 });
