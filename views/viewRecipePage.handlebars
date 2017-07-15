@@ -45,12 +45,14 @@
             <h4 class="text-danger">{{breaklines recipeInstructions}}</h4>
         </div>
     </div>
+    {{#if notes}}
     <div class='row'>
         <div class="notesBox col-sm-10 col-sm-offset-1 text-center">
             <h2 class="text-primary">Notes</h2>
             <h4 class="text-danger">{{breaklines notes}}</h4>
         </div>
     </div>
+    {{/if}}
 
     {{!--nutrition section --}}
     <div class="row">
