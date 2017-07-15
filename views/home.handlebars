@@ -9,7 +9,7 @@
     <div class='background-transparent-black'>
       {{#each recipe}}
       <div class='col-sm-4'>
-        <div class='recipe-img-container text-center'><img class='img-responsive recipe-img' src="{{recipeImg}}">
+        <div class='recipe-img-container text-center' recipe-id='{{id}}'><img class='img-responsive recipe-img' src="{{recipeImg}}">
           <div class='recipe-name text-center title-white'>{{recipeName}}</div>
           <div class='author-name title-white'>{{User.username}}</div>
         </div>
