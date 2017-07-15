@@ -61,7 +61,6 @@ Handlebars.registerHelper('breaklines', function(text) {
 //Routes
 var authRoute = require('./routes/auth.js')(app, passport);
 require("./routes/recipes-api-routes.js")(app);
-require("./routes/users-api-routes.js")(app);
 
 //Sequelize Sync Database
 db.sequelize.sync().then(function () {
