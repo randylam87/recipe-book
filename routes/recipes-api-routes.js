@@ -59,7 +59,7 @@ module.exports = function (app) {
                 let hbsObject = {
                     recipe: matchArray
                 };
-
+                
                 addUserToHbsObj(req, hbsObject);
                 res.render('home', hbsObject);
             });
