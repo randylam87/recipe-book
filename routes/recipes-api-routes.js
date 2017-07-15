@@ -51,7 +51,9 @@ module.exports = function (app) {
                 // res.json(result);
                 let hbsObject = {
                     recipe: matchArray,
+                    search: true
                 };
+                
                 addUserToHbsObj(req, hbsObject);
                 res.render('home', hbsObject);
             });
