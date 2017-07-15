@@ -43,23 +43,22 @@ module.exports = function (app) {
             .then(function (result) {
                 let matchArray = [];
                 result.forEach((data, index) => {
+                    if (data.recipeName.toLowerCase().split(" ").indexOf(req.query.search.toLowerCase()) > -1) {
+                        matchArray.push(data);
+                        return;
+                    }
                     data.Ingredients.forEach((singleIngredient, index) => {
                         if (singleIngredient.ingredientName.toLowerCase().split(" ").indexOf(req.query.search.toLowerCase()) > -1) {
                             matchArray.push(data);
                             return;
                         }
                     });
-
-                    if (data.recipeName.toLowerCase().split(" ").indexOf(req.query.search.toLowerCase()) > -1) {
-                        matchArray.push(data);
-                        return;
-                    }
                 });
                 matchArray.push(req.user);
                 let hbsObject = {
                     recipe: matchArray
                 };
-                
+
                 addUserToHbsObj(req, hbsObject);
                 res.render('home', hbsObject);
             });
