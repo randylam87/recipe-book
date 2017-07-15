@@ -1,7 +1,7 @@
 {{>navbar/nav}}
 <div class="container">
   <h1 class='title-white'>Cookbook</h1>
-  {{#unless search}}<button class='btn btn-sm btn-danger' id='newRecipe'>Post new recipe</button>{{else}}<div class='title-white'>No Results Found<div>{{/unless}}
+  {{#if homePage}}<button class='btn btn-sm btn-danger' id='newRecipe'>Post new recipe</button>{{/if}}{{#if noSearchResults}}<div class='title-white'>No Results Found<div>{{/if}}
   <br>
   <br>
     <div class='container background-transparent-black'>

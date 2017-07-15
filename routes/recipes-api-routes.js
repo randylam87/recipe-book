@@ -19,6 +19,7 @@ module.exports = function (app) {
         }).then(function (queryResult) {
             let hbsObject = {
                 recipe: queryResult,
+                homePage: true
             };
             addUserToHbsObj(req, hbsObject);
             res.render('home', hbsObject);
@@ -56,8 +57,7 @@ module.exports = function (app) {
                 });
                 matchArray.push(req.user);
                 let hbsObject = {
-                    recipe: matchArray,
-                    search: true
+                    recipe: matchArray
                 };
 
                 addUserToHbsObj(req, hbsObject);
