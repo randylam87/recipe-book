@@ -1,5 +1,5 @@
 {{>navbar/nav}}
-<div class="container">
+<div class="container animated fadeIn">
     {{!--image box --}}
     <div class="row">
         <div class="singleRecipe">
@@ -148,6 +148,9 @@
                 <hr>
             </div>
             <div class="modal-footer">
+                 <form action='/recipes/{{id}}?_method=DELETE' method='POST' id='newRecipe'>
+                    <button class="pull-left"> <i style="color:red" class="text-warning fa fa-trash fa-2x" aria-hidden="true"> Delete Recipe</i> </button>
+                    </form>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
