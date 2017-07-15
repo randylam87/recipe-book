@@ -26,29 +26,6 @@ module.exports = function (app) {
             res.render('home', hbsObject);
         });
     });
-    //test
-    app.get("/test", function (req, res) {
-        let userInfo = req.user;
-        db.Recipes.findAll({
-            include: [{
-                model: db.Ingredients,
-                include: [
-                    db.Measurements
-                ]
-            }, {
-                model: db.Users,
-                attributes: ["id", "username"]
-            }]
-        }, {
-            limit: 10
-        }).then(function (queryResult) {
-            let hbsObject = {
-                query: queryResult,
-            };
-            addUserToHbsObj(req, hbsObject);
-            res.json(hbsObject);
-        });
-    });
 
     //Main Page Pagination - Takes all recipes and displays 10 results based on page number
     app.get("/all/page/:number", function (req, res) {
@@ -76,6 +53,7 @@ module.exports = function (app) {
 
     //Find recipe by recipe name - search
     app.get("/recipes/", function (req, res) {
+        let userInfo = req.user;
         db.Recipes.findAll({
                 include: [{
                     model: db.Ingredients,
@@ -94,7 +72,12 @@ module.exports = function (app) {
                     }
                 });
                 result.push(req.user);
-                res.json(result);
+                // res.json(result);
+                let hbsObject = {
+                    recipe: result,
+                };
+                addUserToHbsObj(req, hbsObject);
+                res.render('home', hbsObject);
             });
     });
 
@@ -115,7 +98,6 @@ module.exports = function (app) {
 
     //Find one single recipe - include users
     app.get("/recipes/:id", function (req, res) {
-        console.log(req.params);
         db.Recipes.findOne({
             where: {
                 id: req.params.id
@@ -136,7 +118,6 @@ module.exports = function (app) {
 
     //Loads new recipe page
     app.get('/new', isLoggedIn, (req, res) => {
-        // console.log(req.user);
         let userInfo = req.user;
         res.render('newRecipe', userInfo);
     });
@@ -242,7 +223,6 @@ let updateNutrition = (ingredients, res, recipesDB, req) => {
                 match: true
             };
         }
-        console.log(recipesDB);
         res.render("viewRecipePage", recipesDB);
     });
 };
