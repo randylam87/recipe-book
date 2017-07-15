@@ -22,6 +22,7 @@ module.exports = function (app) {
                 homePage: true
             };
             addUserToHbsObj(req, hbsObject);
+            console.log(hbsObject);
             res.render('home', hbsObject);
         });
     });
@@ -54,12 +55,14 @@ module.exports = function (app) {
                         }
                     });
                 });
-                matchArray.push(req.user);
+                // matchArray.push(req.user);
                 let hbsObject = {
                     recipe: matchArray
                 };
 
                 addUserToHbsObj(req, hbsObject);
+                console.log(hbsObject);
+                // res.json(hbsObject);
                 res.render('home', hbsObject);
             });
     });
