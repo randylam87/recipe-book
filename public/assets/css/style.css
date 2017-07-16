@@ -141,7 +141,7 @@ body {
     background-color: white;
 }
 
-.instructionBox, .notesBox, .nutritionBox, .ingredientBox {
+.instructionBox, .notesBox, .nutritionBox, .ingredientBox, .titleBox {
     background-color: white;
     border: 1px solid #e3e3e3;
 }
