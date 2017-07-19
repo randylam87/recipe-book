@@ -61,7 +61,8 @@ body {
     width: 100%;
 }
 
-.singleRecipe, .recipe-img   {
+.singleRecipe,
+.recipe-img {
     background-color: white;
     border-radius: 15px;
 }
@@ -103,7 +104,7 @@ body {
 }
 
 .background-transparent-black {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 15px;
 }
 
@@ -116,7 +117,8 @@ body {
     margin-bottom: 15px;
 }
 
-.recipe-img, .recipe-img-container {
+.recipe-img,
+.recipe-img-container {
     border-radius: 15px;
 }
 
@@ -125,7 +127,8 @@ body {
     width: auto;
 }
 
-.recipe-name, .author-name {
+.recipe-name,
+.author-name {
     position: absolute;
     width: 100%;
     padding: 10px;
@@ -141,25 +144,34 @@ body {
     background-color: white;
 }
 
-.instructionBox, .notesBox, .nutritionBox, .ingredientBox, .titleBox {
+.instructionBox,
+.notesBox,
+.nutritionBox,
+.ingredientBox,
+.titleBox {
     background-color: white;
     border: 1px solid #e3e3e3;
 }
 
-.imageStyle{
+.imageStyle {
     width: 70%;
     height: 90%;
     margin-top: 10px;
 }
 
-.recipe-name{
-    background: rgba(126, 216, 249,0.3) ;
+.recipe-name {
+    background: rgba(126, 216, 249, 0.3);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
 
-.author-name{
-    background: rgba(126, 216, 249,0.3) ;
+.author-name {
+    background: rgba(126, 216, 249, 0.3);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+}
+
+.makeWhite {
+    background: white;
+    border-radius: 15px 15px 15px 15px;
 }
