@@ -6,8 +6,8 @@ The goal of the **Cookbook** was to provide people with an easy and straight for
 
 ### Developers
 - Team: 
-  - Dennis Nguyen
   - Randy Lam
+  - Dennis Nguyen
   - Carlos Perez
 
 ### Feature List
